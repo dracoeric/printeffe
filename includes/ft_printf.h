@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/14 17:38:59 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/14 18:42:57 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ typedef	struct	s_format
 	char			conversion;
 }				t_format;
 
-int				ft_conv_d(const format *format, va_arg ap);
-void			ft_printf(const restrict char *format, ...);
+int				ft_conv_d(const t_format *format, va_list ap);
+void			ft_printf(const char *restrict format, ...);
 
-typedef	int		(*t_converter)(const t_format *, va_arg);
+typedef	int		(*t_converter)(const t_format *, va_list);
 typedef struct	s_conv
 {
 	char		*symbol;
