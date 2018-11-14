@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/14 17:27:10 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/14 17:47:49 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 int		manage_dir(const restrict char *format, va_arg ap, int *i)
 {
-	
+	t_format *format;
 
+	format = manage_format(format, &i);
+	
 
 }
 
