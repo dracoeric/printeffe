@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/15 10:33:58 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/15 11:58:44 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static	int	init_format(t_format *format)
 {
-	char str[0];
+	char str[3];
 
 	format->pound = 0;
 	format->plus = 0;
@@ -27,6 +27,7 @@ static	int	init_format(t_format *format)
 /*	if(!(format->data_format_modifier = (char *)malloc(sizeof(char) * 3)))
 		return (-1);
 */
+	format->data_format_modifier = str;
 	format->data_format_modifier[0] = '\0';
 	format->data_format_modifier[1] = '\0';
 	format->data_format_modifier[2] = '\0';	
@@ -34,23 +35,25 @@ static	int	init_format(t_format *format)
 	return (0);
 }
 
-static	int	manage_dir(const char *format_str, va_list ap, int *i)
+static	int	manage_dir(const char *format_str, int *i)
 {
 	t_format	*format;
-	t_converter	fun;
+//	t_converter	fun;
 	int			is_err;
 
 	is_err = 0;
+	format = NULL;
 	is_err = init_format(format);
 	if (is_err == -1)
 		return (-1);
-	is_err = manage_format(format_str, format, ap, &i);
+	is_err = manage_format(format_str, format, i);
 	if (is_err == -1)
 		return (-1);
-	is_err = get_converter(format, &fun);
+//	is_err = get_converter(format, &fun);
 	if (is_err == -1)
 		return (-1);
-	return (fun(format, ap));
+//	return (fun(format, ap));
+	return (0);
 }
 
 int			ft_printf(const char *format_str, ...)
@@ -63,16 +66,16 @@ int			ft_printf(const char *format_str, ...)
 	i = 0;
 	ret = 0;
 	is_err = 0;
-	va_start(ap, format);
+	va_start(ap, format_str);
 	while (format_str[i] != '\0' && is_err >= 0)
 	{
-		while (format_str[i] != '%' && format_str[i] = '\0'	&& is_err >= 0)
+		while (format_str[i] != '%' && format_str[i] != '\0' && is_err >= 0)
 		{
 			is_err = write(1, &(format_str[i]), 1);
 			ret += is_err;
 			i++;
 		}
-		is_err = manage_dir(format, ap, &i);
+		is_err = manage_dir(format_str, &i);
 		ret += is_err;
 	}
 	va_end(ap);
