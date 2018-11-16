@@ -6,14 +6,16 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/15 11:58:44 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/16 11:30:25 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "ft_con_tab.h"
 #include <unistd.h>
+#include <stdlib.h>
 
-static	int	init_format(t_format *format)
+static	int		init_format(t_format *format)
 {
 	char str[3];
 
@@ -35,28 +37,44 @@ static	int	init_format(t_format *format)
 	return (0);
 }
 
-static	int	manage_dir(const char *format_str, int *i)
+int				get_converter(t_format *format, t_converter *fun)
+{
+	int		i;
+
+	i = 0;
+	while (conv_tab[i].symbol != 0)
+	{
+		if (conv_tab[i].symbol == format->conversion)
+		{
+			*fun = conv_tab[i].converter;
+			return (1);
+		}
+		i++;
+	}
+	return (-1);
+}
+
+static	int		manage_dir(const char *format_str, int *i, va_list ap)
 {
 	t_format	*format;
-//	t_converter	fun;
+	t_converter	fun;
 	int			is_err;
 
 	is_err = 0;
-	format = NULL;
-	is_err = init_format(format);
 	if (is_err == -1)
 		return (-1);
+	format = NULL;
+	is_err = init_format(format);
 	is_err = manage_format(format_str, format, i);
 	if (is_err == -1)
 		return (-1);
-//	is_err = get_converter(format, &fun);
+	is_err = get_converter(format, &fun);
 	if (is_err == -1)
 		return (-1);
-//	return (fun(format, ap));
-	return (0);
+	return (fun(format, ap));
 }
 
-int			ft_printf(const char *format_str, ...)
+int				ft_printf(const char *format_str, ...)
 {
 	int i;
 	int ret;
@@ -75,7 +93,9 @@ int			ft_printf(const char *format_str, ...)
 			ret += is_err;
 			i++;
 		}
-		is_err = manage_dir(format_str, &i);
+		if (is_err < 0)
+			return (-1);
+		is_err = manage_dir(format_str, &i, ap);
 		ret += is_err;
 	}
 	va_end(ap);

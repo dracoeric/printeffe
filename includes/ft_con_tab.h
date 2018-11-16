@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_con_tab.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 09:56:28 by erli              #+#    #+#             */
-/*   Updated: 2018/11/16 12:14:27 by erli             ###   ########.fr       */
+/*   Created: 2018/11/16 11:20:49 by erli              #+#    #+#             */
+/*   Updated: 2018/11/16 11:26:56 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
 
-int		main(void)
+t_conv	conv_tab[] =
 {
-	char	*str;
-	int	i;
-	char  a;
-	long b;
-//	unsigned char x = 0x64;
-	long long j = 9223372036854775807LL;
-
-
-	a = 1;
-	j = (long long)a;
-	b = 3;
-	i = 2;
-	str = "ca\nca";
-	printf("%lld\n", j);
-	return (0);
-}
+	{'d', &ft_conv_d},
+	{'\0', &ft_usage}
+};

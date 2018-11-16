@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_usage.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 09:56:28 by erli              #+#    #+#             */
-/*   Updated: 2018/11/16 12:14:27 by erli             ###   ########.fr       */
+/*   Created: 2018/11/16 11:03:26 by erli              #+#    #+#             */
+/*   Updated: 2018/11/16 11:15:50 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "ft_printf.h"
+#include <stdlib.h>
 
-int		main(void)
+int		ft_usage(const t_format *format, va_list ap)
 {
-	char	*str;
-	int	i;
-	char  a;
-	long b;
-//	unsigned char x = 0x64;
-	long long j = 9223372036854775807LL;
-
-
-	a = 1;
-	j = (long long)a;
-	b = 3;
-	i = 2;
-	str = "ca\nca";
-	printf("%lld\n", j);
+	if (format != NULL && ap != NULL)
+		return (0);
 	return (0);
 }

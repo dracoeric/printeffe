@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/15 11:53:13 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/16 11:34:02 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static	int		ft_simple_atoi(const char *format_str, int *i, int j)
 	return (nb);
 }
 
-void			get_len_modifier(const char *format_str, t_format *format, int *i)
+static	void	get_len_modifier(const char *format_str, t_format *format, int *i)
 {
 	if (char_in_str(format_str[*i], LEGAL_MOD))
 	{

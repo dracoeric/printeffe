@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_util.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 09:56:28 by erli              #+#    #+#             */
-/*   Updated: 2018/11/16 12:14:27 by erli             ###   ########.fr       */
+/*   Created: 2018/11/16 11:44:53 by erli              #+#    #+#             */
+/*   Updated: 2018/11/16 12:15:35 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
 
-int		main(void)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	char	*str;
-	int	i;
-	char  a;
-	long b;
-//	unsigned char x = 0x64;
-	long long j = 9223372036854775807LL;
+	size_t i;
+
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0' && i < n)
+		i++;
+	if (i == n)
+		return (0);
+	return (s1[i] - s2[i]);
+}
+
+int		ft_strlen(const char *s1)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_atoi_long_long(long long nb)
+{
 
 
-	a = 1;
-	j = (long long)a;
-	b = 3;
-	i = 2;
-	str = "ca\nca";
-	printf("%lld\n", j);
-	return (0);
 }
