@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/16 15:27:55 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/17 18:33:01 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ static	int		init_format(t_format **format)
 	(*format)->data_format_modifier[1] = '\0';
 	(*format)->data_format_modifier[2] = '\0';	
 	(*format)->conversion = '\0';
-	return (0);
+	return (1);
 }
 
-int				get_converter(t_format *format, t_converter *fun)
+static	int		get_converter(t_format *format, t_converter *fun)
 {
 	int		i;
 
@@ -61,10 +61,12 @@ static	int		manage_dir(const char *format_str, int *i, va_list ap)
 	is_err = 0;
 	format = NULL;
 	is_err = init_format(&format);
-	is_err = manage_format(format_str, &format, i);
-	ft_put_format(format);
 	if (is_err == -1)
 		return (-1);
+	is_err = manage_format(format_str, &format, i);
+	if (is_err == -1)
+		return (-1);
+	ft_put_format(format);
 	is_err = get_converter(format, &fun);
 	if (is_err == -1)
 		return (-1);
