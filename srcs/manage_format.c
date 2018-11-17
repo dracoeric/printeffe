@@ -6,17 +6,21 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/16 11:34:02 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/17 18:26:18 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	int		char_in_str(char c, char *str)
+static	int		test_format(t_format *format)
 {
-	while (*str != '\0' && c != *str)
-		str++;
-	return (c == *str);
+	if (format->pound && char_in_str(format->conversion, "oxX") == 0)
+		return (0);
+	if (format->zero && format->minus)
+		return (0);
+	if (format->plus && format->space)
+		return (0);
+	return (1);
 }
 
 static	void	get_flags(const char *format_str, t_format *format, int *i)
@@ -37,59 +41,53 @@ static	void	get_flags(const char *format_str, t_format *format, int *i)
 	}
 }
 
-static	int		ft_simple_atoi(const char *format_str, int *i, int j)
+static	int		ft_simple_atoi(const char *format_str, int *i)
 {
 	int nb;
 
 	nb = 0;
-	while (format_str[*i] >= '0' && format_str[*i] <= '9' && *i < j)
+	while (format_str[*i] >= '0' && format_str[*i] <= '9' && *i)
 	{
-		nb = 10 * nb + (format_str[*i] + '0');
+		nb = (10 * nb) + (format_str[*i] - '0');
 		*i = *i + 1;
 	}
 	return (nb);
 }
 
-static	void	get_len_modifier(const char *format_str, t_format *format, int *i)
+static	void	get_len_modifier(const char *format_str, t_format **format,
+					int *i)
 {
 	if (char_in_str(format_str[*i], LEGAL_MOD))
 	{
-		format->data_format_modifier[0] = format_str[*i];
+		(*format)->data_format_modifier[0] = format_str[*i];
 		if (format_str[*i] == format_str[*i + 1] && (format_str[*i] == 'h'
-			 || format_str[*i] == 'l'))
+			|| format_str[*i] == 'l'))
 		{
-			format->data_format_modifier[1] = format_str[*i];
+			(*format)->data_format_modifier[1] = format_str[*i];
 			*i = *i + 1;
 		}
 		*i = *i + 1;
 	}
 }
 
-int				manage_format(const char *format_str, t_format *format, int *i)
+int				manage_format(const char *format_str, t_format **format, int *i)
 {
-	int len;	
-	int j;
+	int len;
 
-	get_flags(format_str, format, i);
-	j = *i;
-	while (format_str[j] >= '0' && format_str[j] <= '9')
-		j++;
-	len = ft_simple_atoi(format_str, i, j);
-	format->m_width = len;
+	get_flags(format_str, *format, i);
+	len = ft_simple_atoi(format_str, i);
+	(*format)->m_width = len;
 	if (format_str[*i] == '.')
 		*i = *i + 1;
-	j = *i;
-	while (format_str[j] >= '0' && format_str[j] <= '9')
-		j++;
-	len = ft_simple_atoi(format_str, i, j);
-	format->precision = len;
+	len = ft_simple_atoi(format_str, i);
+	(*format)->precision = len;
 	get_len_modifier(format_str, format, i);
 	if (char_in_str(format_str[*i], LEGAL_CONV))
 	{
-		format->conversion = format_str[*i];
+		(*format)->conversion = format_str[*i];
 		*i = *i + 1;
 	}
 	else
-		return (-1);
-	return (0);
+		return (0);
+	return (test_format(*format));
 }

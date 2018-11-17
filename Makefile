@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/15 11:35:11 by erli             ###   ########.fr        #
+#    Updated: 2018/11/17 18:24:27 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -16,9 +16,11 @@ SRCSDIR		=		srcs
 
 OBJSDIR		=		objs
 
-SRCS		=		$(shell find $(SRCSDIR) -name "*.c")
+SRCS		=		ft_printf.c		ft_conv_d.c		ft_put_format.c		\
+					ft_usage.c		ft_util.c		main.c				\
+					manage_format.c	
 
-OBJS		=		$(patsubst $(SRCSDIR)/%.c,$(OBJSDIR)/%.o, $(SRCS))
+OBJS		=		$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
 
 CC			=		gcc
 

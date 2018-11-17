@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:44:53 by erli              #+#    #+#             */
-/*   Updated: 2018/11/16 13:58:29 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/17 18:24:45 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,13 @@ int		ft_strlen(const char *s1)
 	while (s1[i] != '\0')
 		i++;
 	return (i);
+}
+
+int		char_in_str(char c, char *str)
+{
+	if (str == 0)
+		return (0);
+	while (*str != '\0' && c != *str)
+		str++;
+	return (c == *str);
 }

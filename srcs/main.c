@@ -6,27 +6,29 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 09:56:28 by erli              #+#    #+#             */
-/*   Updated: 2018/11/16 12:14:27 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/17 17:58:25 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include "ft_printf.h"
 
 int		main(void)
 {
 	char	*str;
-	int	i;
-	char  a;
-	long b;
+	int		i;
+	char	a;
+	long	b;
 //	unsigned char x = 0x64;
 	long long j = 9223372036854775807LL;
+	short	c;
 
-
-	a = 1;
-	j = (long long)a;
+	a = -128;	
 	b = 3;
-	i = 2;
+	c = -1;
+	i = 11312;
 	str = "ca\nca";
-	printf("%lld\n", j);
+	printf("% 14.2d\n", i);
+	ft_printf("%++++++000000-----    ###2312.3424hhd\n", j);
 	return (0);
 }
