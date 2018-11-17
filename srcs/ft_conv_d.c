@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/17 17:10:19 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/17 18:46:34 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ static	char	*ft_itoa_long_long(long long nb)
 	}
 	str[len] = '\0';
 	return (str);
+}
+
+static	void	manage_width(t_format *format, char **str)
+{
+
+
+
 }
 
 int				ft_conv_d(const t_format *format, va_list ap)
