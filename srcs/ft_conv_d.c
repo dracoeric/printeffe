@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/17 18:46:34 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/19 11:57:36 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,96 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-static	int		max_power(long long nb, long long *pow)
+static	char	*make_str(const t_format *format, long long nb, long long *pow,
+					int *num_len)
 {
-	int i;
+	char	*str;
+	int		str_len;
 
-	i = 0;
+	*pow = 1;
 	if (nb < 0)
-		i++;
+		*pow = -1;
+	*num_len = 0;
 	if (nb <= -10)
 	{
-		i++;
+		*num_len =*num_len + 1;
 		*pow = -10;
 	}
 	while (nb / *pow >= 10)
 	{
 		*pow *= 10;
-		i++;
+		*num_len = *num_len +1;
 	}
-	return (i);
-}
-
-static	char	*ft_itoa_long_long(long long nb)
-{
-	int			len;
-	long long	pow;
-	char		*str;
-
-	pow = 1;
-	if (nb < 0)
-		pow = -1;
-	len = max_power(nb, &pow);
-	if (!(str = (char *)malloc(sizeof(char) * (len + 1))))
+	str_len = (format->precision > *num_len ? format->precision : *num_len);
+	if (nb < 0 || format->plus || format->space)
+		str_len++;
+	if (!(str = (char *)malloc(sizeof(char) * (str_len + 1))))
 		return (0);
-	len = 0;
-	if (nb < 0)
-	{
-		str[0] = '-';
-		len++;
-	}
-	while (pow != 0)
-	{
-		str[len] = nb / pow + '0';
-		nb = nb % pow;
-		pow /= 10;
-		len++;
-	}
-	str[len] = '\0';
 	return (str);
 }
 
-static	void	manage_width(t_format *format, char **str)
+static	char	*ft_itoa_long_long(const t_format *format, long long nb)
 {
+	int			num_len;
+	long long	pow;
+	char		*str;
+	int 		i;
+	int			str_len;
 
+	if (!(str = make_str(format, nb, &pow, &num_len)))
+		return (0);
+	i = 0;
+	str_len = ft_strlen(str);
+	while (i < str_len - num_len)
+	{
+		str[i] = '0';
+		i++;
+	}
+	while (pow != 0)
+	{
+		str[i] = nb / pow + '0';
+		nb = nb % pow;
+		pow /= 10;
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
 
+static	char 	*add_width(const t_format *format, char **str)
+{
+	char	*str_add;
+	char	*old;
+	int		nb_spaces;
+	int		i;
 
+	if (*str == NULL)
+		return (0);
+	old = *str;
+	nb_spaces = format->m_width - (ft_strlen(*str) +
+		format->space + format->plus);
+	printf("nb_spaces = %d\n", nb_spaces);
+	if (nb_spaces > 0)
+	{
+		if (!(str_add = (char *)malloc(sizeof(char) * nb_spaces)))
+			return (0);
+		i = 0;
+		while (i < nb_spaces)
+		{
+			str_add[i] = ((10 * format->precision + format->zero == 1) ? '0' : ' ');
+			i++;
+		}
+		str_add[i] = '\0';
+		if (format->minus)
+			*str = ft_strjoin(*str, str_add);
+		else
+			*str = ft_strjoin(str_add, *str);
+		if (*str == NULL)
+			return (0);
+		free(old);
+		free(str_add);
+	}
+	return (*str);
 }
 
 int				ft_conv_d(const t_format *format, va_list ap)
@@ -85,7 +121,7 @@ int				ft_conv_d(const t_format *format, va_list ap)
 		nb = (long long)va_arg(ap, int);
 	else
 		nb = (long long)va_arg(ap, int);
-	if (!(str = ft_itoa_long_long(nb)))
-		return (-1);
+	str = ft_itoa_long_long(format, nb);
+	str = add_width(format, &str);
 	return (write(1, str, ft_strlen(str)));
 }

@@ -6,12 +6,13 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:44:53 by erli              #+#    #+#             */
-/*   Updated: 2018/11/17 18:24:45 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/19 11:55:11 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -42,4 +43,33 @@ int		char_in_str(char c, char *str)
 	while (*str != '\0' && c != *str)
 		str++;
 	return (c == *str);
+}
+
+char 	*ft_strjoin(const char *s1, const char *s2)
+{
+	int		l1;
+	int		l2;
+	int		i;
+	char	*str;
+
+	if (s1 == NULL)
+		return ((char *)s2);
+	if (s2 == NULL)
+		return ((char *)s1);
+	l1 = ft_strlen(s1);
+	l2 = ft_strlen(s2);
+	if (!(str = (char *)malloc(sizeof(char) * (l1 + l2 + 1))))
+		return (0);
+	i = 0;
+	while (i < l1)
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (i <= l1 + l2)
+	{
+		str[i] = s2[i - l1];
+		i++;
+	}
+	return (str);
 }
