@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/19 17:10:39 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/19 17:16:34 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,7 @@ int				ft_printf(const char *format_str, ...)
 			ret += is_err;
 			i++;
 		}
-		if (is_err < 0)
-			return (-1);
-		if (format_str[i] == '%')
+		if (format_str[i] == '%' && is_err >= 0)
 		{
 			i++;
 			is_err = manage_dir(format_str, &i, ap);
