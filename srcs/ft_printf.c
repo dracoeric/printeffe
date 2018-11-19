@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/17 18:33:01 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/19 17:10:39 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static	int		init_format(t_format **format)
 	(*format)->space = 0;
 	(*format)->m_width = 0;
 	(*format)->precision = 0;
-	if(!((*format)->data_format_modifier = (char *)malloc(sizeof(char) * 3)))
+	if (!((*format)->data_format_modifier = (char *)malloc(sizeof(char) * 3)))
 		return (-1);
 	(*format)->data_format_modifier[0] = '\0';
 	(*format)->data_format_modifier[1] = '\0';
-	(*format)->data_format_modifier[2] = '\0';	
+	(*format)->data_format_modifier[2] = '\0';
 	(*format)->conversion = '\0';
 	return (1);
 }
@@ -75,10 +75,10 @@ static	int		manage_dir(const char *format_str, int *i, va_list ap)
 
 int				ft_printf(const char *format_str, ...)
 {
-	int i;
-	int ret;
-	int is_err;
-	va_list ap;
+	int		i;
+	int		ret;
+	int		is_err;
+	va_list	ap;
 
 	i = 0;
 	ret = 0;

@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:44:53 by erli              #+#    #+#             */
-/*   Updated: 2018/11/19 16:31:27 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/19 17:09:44 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		char_in_str(char c, char *str)
 	return (c == *str);
 }
 
-char 	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
 	int		l1;
 	int		l2;
@@ -84,7 +84,7 @@ char	*ft_strjoinfree(char *s1, char *s2, int n)
 			free(s1);
 		if (n == 2 || n == 3)
 			free(s2);
-		return NULL;
+		return (NULL);
 	}
 	if (n == 1 || n == 3)
 		free(s1);
