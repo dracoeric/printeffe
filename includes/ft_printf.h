@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/17 18:26:03 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/19 16:29:41 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef	struct	s_format
 int				char_in_str(char c, char *str);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strlen(const char *s);
+char			*ft_strjoin(const char *s1, const char *s2);
+char			*ft_strjoinfree(const char *s1, const char *s2, int n);
 int				ft_conv_d(const t_format *format, va_list ap);
 int				ft_usage(const t_format *foirmat, va_list ap);
 int				ft_printf(const char *format_str, ...);

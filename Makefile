@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/17 18:24:27 by erli             ###   ########.fr        #
+#    Updated: 2018/11/19 15:15:49 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -37,6 +37,7 @@ $(NAME)		:		$(OBJS) includes/ft_printf.h
 					$(CC) $(CFLAG) $(OBJS) $(INCL) -o $(NAME)
 
 $(OBJSDIR)/%.o			:		$(SRCSDIR)/%.c
+					@mkdir -p $(OBJSDIR)
 					$(CC) $(CFLAG) $(INCL) -c $< -o $@
 
 clean		:

@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/19 11:57:36 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/19 16:42:19 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static	char	*make_str(const t_format *format, long long nb, long long *pow,
 	*num_len = 0;
 	if (nb <= -10)
 	{
-		*num_len =*num_len + 1;
+		*num_len = *num_len + 1;
 		*pow = -10;
 	}
 	while (nb / *pow >= 10)
 	{
 		*pow *= 10;
-		*num_len = *num_len +1;
+		*num_len = *num_len + 1;
 	}
 	str_len = (format->precision > *num_len ? format->precision : *num_len);
 	if (nb < 0 || format->plus || format->space)
@@ -47,7 +47,7 @@ static	char	*ft_itoa_long_long(const t_format *format, long long nb)
 	int			num_len;
 	long long	pow;
 	char		*str;
-	int 		i;
+	int			i;
 	int			str_len;
 
 	if (!(str = make_str(format, nb, &pow, &num_len)))
@@ -70,39 +70,61 @@ static	char	*ft_itoa_long_long(const t_format *format, long long nb)
 	return (str);
 }
 
-static	char 	*add_width(const t_format *format, char **str)
+static	char	*join_width(const t_format *format, char **str, char **str_add,
+					long long nb)
+{
+	char	*sign;
+
+	sign = NULL;
+	if (nb < 0)
+		sign = "-";
+	else if (format->plus)
+		sign = "+";
+	else if (format->space)
+		sign = " ";
+	if ((*str_add)[0] == '0')
+	{
+		if (!(*str_add = ft_strjoinfree(sign, *str_add, 2)))
+			return (NULL);
+		*str = ft_strjoinfree(*str_add, *str, 3);
+	}
+	else
+	{
+		if (!(*str = ft_strjoinfree(sign, *str, 2)))
+			return (NULL);
+		if (format->minus)
+			*str = ft_strjoinfree(*str, *str_add, 3);
+		else
+			*str = ft_strjoinfree(*str_add, *str, 3);
+	}
+	return (*str);
+}
+
+static	char	*add_width(const t_format *format, char **str, long long nb)
 {
 	char	*str_add;
-	char	*old;
 	int		nb_spaces;
 	int		i;
 
 	if (*str == NULL)
 		return (0);
-	old = *str;
-	nb_spaces = format->m_width - (ft_strlen(*str) +
-		format->space + format->plus);
-	printf("nb_spaces = %d\n", nb_spaces);
+	nb_spaces = format->m_width - (ft_strlen(*str)
+		+ (nb < 0 || format->space || format->plus));
+	str_add = "";
 	if (nb_spaces > 0)
 	{
-		if (!(str_add = (char *)malloc(sizeof(char) * nb_spaces)))
+		if (!(str_add = (char *)malloc(sizeof(char) * (nb_spaces + 1))))
 			return (0);
 		i = 0;
 		while (i < nb_spaces)
 		{
-			str_add[i] = ((10 * format->precision + format->zero == 1) ? '0' : ' ');
+			str_add[i] = ((10 * format->precision + format->zero == 1)
+				? '0' : ' ');
 			i++;
 		}
 		str_add[i] = '\0';
-		if (format->minus)
-			*str = ft_strjoin(*str, str_add);
-		else
-			*str = ft_strjoin(str_add, *str);
-		if (*str == NULL)
-			return (0);
-		free(old);
-		free(str_add);
 	}
+	*str = join_width(format, str, &str_add, nb);
 	return (*str);
 }
 
@@ -122,6 +144,7 @@ int				ft_conv_d(const t_format *format, va_list ap)
 	else
 		nb = (long long)va_arg(ap, int);
 	str = ft_itoa_long_long(format, nb);
-	str = add_width(format, &str);
+	if (!(str = add_width(format, &str, nb)))
+		return (-1);
 	return (write(1, str, ft_strlen(str)));
 }
