@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/17 18:42:14 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/20 17:19:41 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ static	int		test_format(t_format *format)
 	if (format->zero && format->minus)
 		return (-1);
 	if (format->plus && format->space)
+		return (-1);
+	if ((format->plus || format->space) && (char_in_str(format->conversion,
+		"ouxX") == 1))
 		return (-1);
 	return (1);
 }

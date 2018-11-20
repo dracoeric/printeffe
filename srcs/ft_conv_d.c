@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/20 16:16:31 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/20 18:02:05 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ static	char	*make_str(const t_format *format, long long nb, long long *pow,
 		*num_len = *num_len + 1;
 	}
 	str_len = (format->precision > *num_len ? format->precision : *num_len);
-	if (nb < 0 || format->plus || format->space)
-		str_len++;
 	if (!(str = (char *)ft_memalloc(sizeof(char) * (str_len + 1), 32)))
 		return (0);
 	str[str_len] = '\0';
@@ -85,7 +83,7 @@ static	char	*join_width(const t_format *format, char **str, char **str_add,
 		sign = " ";
 	if ((*str_add)[0] == '0')
 	{
-		if (!(*str_add = ft_strjoinfree(&sign, str_add, 3)))
+		if (!(*str_add = ft_strjoinfree(&sign, str_add, 2)))
 			return (NULL);
 		*str = ft_strjoinfree(str_add, str, 3);
 	}
@@ -145,11 +143,6 @@ int				ft_conv_d(t_format *format, va_list ap)
 	else
 		nb = (long long)va_arg(ap, int);
 	str = ft_itoa_long_long(format, nb);
-	if (str == NULL)
-	{
-		free_format(format);
-		return (-1);
-	}
 	if (!(str = add_width(format, &str, nb)))
 	{
 		free_format(format);

@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 14:08:42 by erli              #+#    #+#             */
-/*   Updated: 2018/11/20 14:56:20 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/20 18:08:08 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	*ft_memalloc(size_t n, int c)
 {
 	void			*ptr;
-	size_t 			i;
+	size_t			i;
 	unsigned char	*str;
 
 	if (!(ptr = malloc(n)))
