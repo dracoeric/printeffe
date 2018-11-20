@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/19 16:29:41 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/20 14:22:52 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ int				char_in_str(char c, char *str);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_strlen(const char *s);
 char			*ft_strjoin(const char *s1, const char *s2);
-char			*ft_strjoinfree(const char *s1, const char *s2, int n);
-int				ft_conv_d(const t_format *format, va_list ap);
-int				ft_usage(const t_format *foirmat, va_list ap);
+char			*ft_strjoinfree(char **s1, char **s2, int n);
+void			*ft_memalloc(size_t n, int c);
+int				write_free(int fd, char **str, size_t n);
+void			free_format(t_format *format);
+int				ft_conv_d(t_format *format, va_list ap);
+int				ft_usage(t_format *format, va_list ap);
 int				ft_printf(const char *format_str, ...);
 int				manage_format(const char *format_str, t_format **format, int *i);
 
@@ -52,7 +55,7 @@ int				manage_format(const char *format_str, t_format **format, int *i);
 void			ft_put_format(t_format *format);
 
 
-typedef	int		(*t_converter)(const t_format *, va_list);
+typedef	int		(*t_converter)(t_format *, va_list);
 typedef struct	s_conv
 {
 	char		symbol;

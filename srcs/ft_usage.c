@@ -6,14 +6,14 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:03:26 by erli              #+#    #+#             */
-/*   Updated: 2018/11/16 11:15:50 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/20 12:30:22 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdlib.h>
 
-int		ft_usage(const t_format *format, va_list ap)
+int		ft_usage(t_format *format, va_list ap)
 {
 	if (format != NULL && ap != NULL)
 		return (0);

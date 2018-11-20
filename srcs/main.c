@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 09:56:28 by erli              #+#    #+#             */
-/*   Updated: 2018/11/19 16:42:33 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/20 12:32:35 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ int		main(void)
 	char	a;
 	long	b;
 //	unsigned char x = 0x64;
-	long long j = -9223372036854775807LL;
+//	long long j = -9223372036854775807LL;
 	short	c;
 
 	a = -128;	
 	b = 3;
 	c = -1;
-	i = -11312;
+	i = 10;
+	
 	str = "ca\nca";
-	printf("%020.3d\n", i);
-	ret = ft_printf("%23lld\n", j);
+	printf("%20d\n", i);
+	ret = ft_printf("oellele %23i fdsfds %++++3i\n", i, i);
 	printf("\nret = %d\n", ret);
 	return (0);
 }

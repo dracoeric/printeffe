@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_con_tab.h                                       :+:      :+:    :+:   */
+/*   ft_free_format.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 11:20:49 by erli              #+#    #+#             */
-/*   Updated: 2018/11/20 09:12:06 by erli             ###   ########.fr       */
+/*   Created: 2018/11/20 12:07:05 by erli              #+#    #+#             */
+/*   Updated: 2018/11/20 12:31:53 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdlib.h>
 
-t_conv	conv_tab[] =
+void	free_format(t_format *format)
 {
-	{'d', &ft_conv_d},
-	{'i', &ft_conv_d},
-	{'\0', &ft_usage}
-};
+	free(format->data_format_modifier);
+	free(format);
+}
