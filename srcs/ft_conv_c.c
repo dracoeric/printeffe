@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/21 12:02:43 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/21 15:33:31 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_conv_c(t_format *format, va_list ap)
 	len = (nb_spaces < 0 ? 0 : nb_spaces);
 	if (!(str = (unsigned char *)ft_memalloc(sizeof(unsigned char)
 		* (len + 2), 32)))
-		return (0);
+		return (-1);
 	if (format->minus)
 		str[0] = (unsigned char)va_arg(ap, int);
 	else
