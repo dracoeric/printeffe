@@ -6,12 +6,11 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/20 18:02:05 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/21 13:53:37 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
 #include <stdlib.h>
 
 static	char	*make_str(const t_format *format, long long nb, long long *pow,
@@ -112,7 +111,7 @@ static	char	*add_width(const t_format *format, char **str, long long nb)
 	if (nb_spaces > 0)
 		str_add = (char *)malloc(sizeof(char) * (nb_spaces + 1));
 	else
-		str_add = (char *)malloc(sizeof(char) * 1);
+		str_add = (char *)ft_memalloc(sizeof(char) * 1, 0);
 	if (str_add == NULL)
 		return (0);
 	i = 0;

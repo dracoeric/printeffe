@@ -6,13 +6,15 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:44:53 by erli              #+#    #+#             */
-/*   Updated: 2018/11/20 13:59:33 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/21 11:06:17 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+#include <stdio.h>
 
 int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {

@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/20 17:19:41 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/21 10:32:59 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ static	int		test_format(t_format *format)
 	if (format->pound && char_in_str(format->conversion, "oxX") == 0)
 		return (-1);
 	if (format->zero && format->minus)
-		return (-1);
+		format->zero = 0;
 	if (format->plus && format->space)
-		return (-1);
+		format->space = 0;
 	if ((format->plus || format->space) && (char_in_str(format->conversion,
 		"ouxX") == 1))
+		return (-1);
+	if (char_in_str(format->conversion, "c") && (format->plus
+		|| format->space || format->zero || format->pound
+		|| format->precision))
 		return (-1);
 	return (1);
 }

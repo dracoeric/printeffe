@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/21 13:53:46 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/21 13:54:08 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static	char	*make_str(const t_format *format, unsigned long long nb,
 
 	*pow = 1;
 	*num_len = 1;
-	while (nb / *pow >= 8)
+	while (nb / *pow >= 16)
 	{
-		*pow *= 8;
+		*pow *= 16;
 		*num_len = *num_len + 1;
 	}
 	str_len = (format->precision > *num_len ? format->precision : *num_len);
@@ -34,7 +34,7 @@ static	char	*make_str(const t_format *format, unsigned long long nb,
 }
 
 static	char	*ft_itoa_long_long(const t_format *format,
-					unsigned long long nb)
+					unsigned long long nb, char *base)
 {
 	int					num_len;
 	unsigned long long	pow;
@@ -53,9 +53,9 @@ static	char	*ft_itoa_long_long(const t_format *format,
 	}
 	while (pow != 0)
 	{
-		str[i] = nb / pow + '0';
+		str[i] = base[nb / pow];
 		nb = nb % pow;
-		pow /= 8;
+		pow /= 16;
 		i++;
 	}
 	str[i] = '\0';
@@ -67,10 +67,14 @@ static	char	*join_width(const t_format *format, char **str, char **str_add)
 	char	*sign;
 
 	sign = NULL;
-	if (format->pound && (*str)[0] != '0' && (*str_add)[0] != '0')
-		sign = "0";
+	if (format->pound)
+		sign = "0X";
 	if ((*str_add)[0] == '0')
+	{
+		if (!(*str_add = ft_strjoinfree(&sign, str_add, 2)))
+			return (NULL);
 		*str = ft_strjoinfree(str_add, str, 3);
+	}
 	else
 	{
 		if (!(*str = ft_strjoinfree(&sign, str, 2)))
@@ -91,8 +95,7 @@ static	char	*add_width(const t_format *format, char **str)
 
 	if (*str == NULL)
 		return (0);
-	nb_spaces = format->m_width - ft_strlen(*str) - ((*str)[0] != '0'
-		&& format->pound && !(format->zero));
+	nb_spaces = format->m_width - ft_strlen(*str) - 2 * (format->pound);
 	if (nb_spaces > 0)
 		str_add = (char *)malloc(sizeof(char) * (nb_spaces + 1));
 	else
@@ -111,7 +114,7 @@ static	char	*add_width(const t_format *format, char **str)
 	return (*str);
 }
 
-int				ft_conv_o(t_format *format, va_list ap)
+int				ft_conv_big_x(t_format *format, va_list ap)
 {
 	unsigned long long	nb;
 	char				*str;
@@ -126,7 +129,7 @@ int				ft_conv_o(t_format *format, va_list ap)
 		nb = (unsigned long long)va_arg(ap, int);
 	else
 		nb = (unsigned long long)va_arg(ap, int);
-	str = ft_itoa_long_long(format, nb);
+	str = ft_itoa_long_long(format, nb, "0123456789ABCDEF");
 	if (!(str = add_width(format, &str)))
 	{
 		free_format(format);
