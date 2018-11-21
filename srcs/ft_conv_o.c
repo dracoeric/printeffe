@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/20 17:58:21 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/21 09:18:39 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	char	*join_width(const t_format *format, char **str, char **str_add)
 	char	*sign;
 
 	sign = NULL;
-	if (format->pound && (*str_add)[0] != '0')
+	if (format->pound && (*str)[0] != '0' && (*str_add)[0] != '0')
 		sign = "0";
 	if ((*str_add)[0] == '0')
 		*str = ft_strjoinfree(str_add, str, 3);
