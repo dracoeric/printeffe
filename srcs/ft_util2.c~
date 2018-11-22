@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:34:17 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 12:16:06 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/21 15:34:22 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_strsub(char *str, size_t begin, size_t end)
 {
 	char	*sub;
 	size_t	i;
-	int		len;
+	int 	len;
 
 	if (end < begin)
 		return (NULL);

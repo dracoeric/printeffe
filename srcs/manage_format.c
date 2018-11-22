@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/21 10:32:59 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 11:58:33 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static	void	get_flags(const char *format_str, t_format *format, int *i)
 	}
 }
 
-static	int		ft_simple_atoi(const char *format_str, int *i)
+static	int		ft_simple_atoi(const char *format_str, int *i, int *no_prec)
 {
 	int nb;
 
@@ -57,6 +57,7 @@ static	int		ft_simple_atoi(const char *format_str, int *i)
 	{
 		nb = (10 * nb) + (format_str[*i] - '0');
 		*i = *i + 1;
+		*no_prec = 0;
 	}
 	return (nb);
 }
@@ -80,13 +81,15 @@ static	void	get_len_modifier(const char *format_str, t_format **format,
 int				manage_format(const char *format_str, t_format **format, int *i)
 {
 	int len;
+	int no_prec;
 
 	get_flags(format_str, *format, i);
-	len = ft_simple_atoi(format_str, i);
+	len = ft_simple_atoi(format_str, i, &no_prec);
 	(*format)->m_width = len;
 	if (format_str[*i] == '.')
 		*i = *i + 1;
-	len = ft_simple_atoi(format_str, i);
+	no_prec = 1;
+	len = ft_simple_atoi(format_str, i, &no_prec);
 	(*format)->precision = len;
 	get_len_modifier(format_str, format, i);
 	if (char_in_str(format_str[*i], LEGAL_CONV))
@@ -96,5 +99,7 @@ int				manage_format(const char *format_str, t_format **format, int *i)
 	}
 	else
 		return (-1);
+	if ((*format)->conversion == 'f' && no_prec)
+		(*format)->precision = -1;
 	return (test_format(*format));
 }

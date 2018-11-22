@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/21 15:31:19 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 10:56:42 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int				ft_conv_big_x(t_format *format, va_list ap);
 int				ft_conv_c(t_format *format, va_list ap);
 int				ft_conv_s(t_format *format, va_list ap);
 int				ft_conv_p(t_format *format, va_list ap);
+int				ft_conv_f(t_format *format, va_list ap);
 int				ft_usage(t_format *format, va_list ap);
 int				ft_printf(const char *format_str, ...);
 int				manage_format(const char *format_str, t_format **format, int *i);
