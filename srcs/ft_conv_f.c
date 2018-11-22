@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 13:20:48 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 13:33:10 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	char	*ft_itoa_long_long(const t_format *format, long double nb)
 		nb = (10 * nb) - (pow / 10) * (int)(str[i] - '0');
 		i++;
 	}
-	str = ft_round_up(&str, (int)(pow * nb));
+	ft_round_up(&str, (int)(pow * nb));
 	return (str);
 }
 

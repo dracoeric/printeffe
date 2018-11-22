@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:34:17 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 13:24:19 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 13:33:04 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_strsub(char *str, size_t begin, size_t end)
 	return (sub);
 }
 
-char	*ft_round_up(char **str, int rest)
+void	ft_round_up(char **str, int rest)
 {
 	int		i;
 	int		done;
@@ -70,11 +70,11 @@ char	*ft_round_up(char **str, int rest)
 	add = "1";
 	done = 0;
 	if (*str == NULL)
-		return (NULL);
+		return ;
 	i = ft_strlen(*str) - 1;
 	if (rest >= 5)
 	{
-		while (i-- >= 0 && done == 0)
+		while (i >= 0 && done == 0)
 		{
 			if ((*str)[i] == '9')
 				(*str)[i] = '0';
@@ -83,9 +83,9 @@ char	*ft_round_up(char **str, int rest)
 				(*str)[i]++;
 				done = 1;
 			}
+			i--;
 		}
 		if (done == 0 && (*str)[0] == '0')
 			*str = ft_strjoinfree(&add, str, 2);
 	}
-	return (*str);
 }

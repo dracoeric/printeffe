@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 13:18:28 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 13:33:23 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			*ft_memalloc(size_t n, int c);
 int				write_free(int fd, char **str, size_t n);
 void			free_format(t_format *format);
 char			*ft_strsub(char *str, size_t begin, size_t end);
-char			*ft_round_up(char **str, int rest);
+void			ft_round_up(char **str, int rest);
 int				ft_conv_d(t_format *format, va_list ap);
 int				ft_conv_o(t_format *format, va_list ap);
 int				ft_conv_u(t_format *format, va_list ap);
