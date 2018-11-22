@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 12:14:55 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 13:20:48 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,10 @@ static	char	*ft_itoa_long_long(const t_format *format, long double nb)
 	long double	pow;
 	char		*str;
 	int			i;
-	int			str_len;
 
 	if (!(str = make_str(format, nb, &pow)))
 		return (0);
 	i = 0;
-	str_len = ft_strlen(str);
 	while (pow >= 1 || pow <= -1)
 	{
 		str[i] = (int)(nb / pow) + '0';
@@ -61,14 +59,16 @@ static	char	*ft_itoa_long_long(const t_format *format, long double nb)
 		pow /= 10;
 		i++;
 	}
-	str[i++] = '.';
+	if (format->precision != 0)
+		str[i++] = '.';
 	pow = (nb < 0 ? -10 : 10);
-	while (i < str_len)
+	while (i < ft_strlen(str))
 	{
 		str[i] = (int)(pow * nb) + '0';
 		nb = (10 * nb) - (pow / 10) * (int)(str[i] - '0');
 		i++;
 	}
+	str = ft_round_up(&str, (int)(pow * nb));
 	return (str);
 }
 
