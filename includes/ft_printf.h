@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 16:12:56 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 17:39:33 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdarg.h>
 # include <string.h>
 
-# define LEGAL_MOD "lhL"
+# define LEGAL_MOD "jzlhL"
 # define LEGAL_CONV "diouxXcspf%egbr"
 
 typedef	struct	s_format

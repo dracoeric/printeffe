@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:44:53 by erli              #+#    #+#             */
-/*   Updated: 2018/11/21 11:06:17 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 17:22:04 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		ft_strlen(const char *s1)
 
 int		char_in_str(char c, char *str)
 {
-	if (str == 0)
+	if (str == 0 || c == '\0')
 		return (0);
 	while (*str != '\0' && c != *str)
 		str++;

@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 16:30:33 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 18:06:02 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,23 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char	*add_width(t_format *format, char **str_arg)
+static	char	*add_width(t_format *format, char **str_arg)
 {
 	int		nb_spaces;
 	int		len;
 	char	*str;
+	int		i;
 
 	nb_spaces = format->m_width - ft_strlen(*str_arg);
 	len = (nb_spaces < 0 ? 0 : nb_spaces);
-	if (!(str = (char *)ft_memalloc(sizeof(unsigned char) * (len + 1), 32)))
+	if (!(str = (char *)ft_memalloc(sizeof(unsigned char) * (len + 1), 0)))
 		return (NULL);
-	str[len] = '\0';
+	i = 0;
+	while (i < nb_spaces)
+	{
+		str[i] = (format->zero ? '0' : ' ');
+		i++;
+	}
 	if (format->minus)
 		str = ft_strjoinfree(str_arg, &str, 3);
 	else
@@ -32,7 +38,7 @@ char	*add_width(t_format *format, char **str_arg)
 	return (str);
 }
 
-int		ft_conv_s(t_format *format, va_list ap)
+int				ft_conv_s(t_format *format, va_list ap)
 {
 	char	*str;
 	char	*str_arg;

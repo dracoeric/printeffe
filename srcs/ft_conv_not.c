@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:03:26 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 16:31:00 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 17:16:13 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 
 int		ft_conv_not(t_format *format, va_list ap)
 {
-	char c;
-
 	if (ap == NULL)
 		;
-	c = format->conversion;
 	free_format(format);
-	return (write(1, &c, 1));
+	return (0);
 }

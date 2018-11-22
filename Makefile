@@ -6,18 +6,18 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/22 13:49:07 by erli             ###   ########.fr        #
+#    Updated: 2018/11/22 16:15:24 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME		=		test
+NAME		=		libftprintf.a
 
 SRCSDIR		=		srcs
 
 OBJSDIR		=		objs
 
 SRCS		=		ft_printf.c		ft_conv_d.c		ft_put_format.c		\
-					ft_usage.c		ft_util.c		main.c				\
+					ft_conv_not.c	ft_util.c							\
 					manage_format.c	ft_conv_o.c		ft_free_format.c	\
 					ft_util2.c		ft_conv_u.c		ft_conv_x.c			\
 					ft_conv_big_x.c	ft_conv_c.c		ft_conv_s.c			\
@@ -37,14 +37,12 @@ RM			=		rm -f
 all			:		$(NAME)
 
 $(NAME)		:		$(OBJS) includes/ft_printf.h
-					$(CC) $(CFLAG) $(OBJS) $(INCL) -o $(NAME)
+					ar -rucs $(NAME) $(OBJS)
+					ranlib $(NAME)
 
 $(OBJSDIR)/%.o			:		$(SRCSDIR)/%.c
 					@mkdir -p $(OBJSDIR)
 					$(CC) $(CFLAG) $(INCL) -c $< -o $@
-
-val			:		$(OBJS) includes/ft_printf.h
-					$(CC) -g $(CFLAG) $(OBJS) $(INCL) -o $(NAME)
 
 clean		:
 					$(RM) $(OBJS)

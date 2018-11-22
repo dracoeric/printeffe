@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 16:11:52 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 17:51:37 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,21 @@ static	int		manage_dir(const char *format_str, int *i, va_list ap)
 		free_format(format);
 		return (-1);
 	}
-//	ft_put_format(format);
 	is_err = get_converter(format, &fun);
 	if (is_err == -1)
 		return (-1);
 	return (fun(format, ap));
 }
 
-int				ft_printf(const char *format_str, ...)
+static	int		read_format_str(const char *format_str, va_list ap)
 {
 	int		i;
 	int		ret;
 	int		is_err;
-	va_list	ap;
 
 	i = 0;
 	ret = 0;
 	is_err = 0;
-	va_start(ap, format_str);
 	while (format_str[i] != '\0' && is_err >= 0)
 	{
 		while (format_str[i] != '%' && format_str[i] != '\0' && is_err >= 0)
@@ -103,8 +100,18 @@ int				ft_printf(const char *format_str, ...)
 			ret += is_err;
 		}
 	}
-	va_end(ap);
 	if (is_err < 0)
 		return (-1);
+	return (ret);
+}
+
+int				ft_printf(const char *format_str, ...)
+{
+	va_list	ap;
+	int		ret;
+
+	va_start(ap, format_str);
+	ret = read_format_str(format_str, ap);
+	va_end(ap);
 	return (ret);
 }

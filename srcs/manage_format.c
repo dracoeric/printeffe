@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 15:57:58 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 18:06:59 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 
 static	int		test_format(t_format *format)
 {
-	if (format->pound && char_in_str(format->conversion, "oxX") == 0)
-		return (-1);
 	if (format->zero && format->minus)
 		format->zero = 0;
 	if (format->plus && format->space)
 		format->space = 0;
-	if (char_in_str(format->conversion, "c") && (format->plus
-		|| format->space || format->zero || format->pound))
-		return (-1);
 	return (1);
 }
 
@@ -82,15 +77,21 @@ int				manage_format(const char *format_str, t_format **format, int *i)
 	get_flags(format_str, *format, i);
 	len = ft_simple_atoi(format_str, i);
 	(*format)->m_width = len;
-	if (format_str[*i] == '.')
+	while (char_in_str(format_str[*i], "#0-+ .jzlhL"))
 	{
-		*i = *i + 1;
-		no_prec = 0;
+		if (format_str[*i] == '.')
+		{
+			*i = *i + 1;
+			no_prec = 0;
+			len = ft_simple_atoi(format_str, i);
+			(*format)->precision = (no_prec ? -1 : len);
+		}
+		get_flags(format_str, *format, i);
+		get_len_modifier(format_str, format, i);
 	}
-	len = ft_simple_atoi(format_str, i);
-	(*format)->precision = (no_prec ? -1 : len);
-	get_len_modifier(format_str, format, i);
-	(*format)->conversion = format_str[*i];
-	*i = *i + 1;
+	if (char_in_str(format_str[*i], LEGAL_CONV))
+		(*format)->conversion = format_str[(*i)++];
+	else
+		(*format)->conversion = '\0';
 	return (test_format(*format));
 }
