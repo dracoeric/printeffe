@@ -6,13 +6,16 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:20:49 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 13:47:51 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 16:11:29 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_CON_TAB_H
+# define FT_CON_TAB_H
 
-t_conv	conv_tab[] =
+# include "ft_printf.h"
+
+t_conv	g_conv_tab[] =
 {
 	{'c', &ft_conv_c},
 	{'s', &ft_conv_s},
@@ -25,5 +28,7 @@ t_conv	conv_tab[] =
 	{'X', &ft_conv_big_x},
 	{'f', &ft_conv_f},
 	{'%', &ft_conv_percent},
-	{'\0', &ft_usage}
+	{'\0', &ft_conv_not}
 };
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 11:58:33 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 15:57:58 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,8 @@ static	int		test_format(t_format *format)
 		format->zero = 0;
 	if (format->plus && format->space)
 		format->space = 0;
-	if ((format->plus || format->space) && (char_in_str(format->conversion,
-		"ouxX") == 1))
-		return (-1);
 	if (char_in_str(format->conversion, "c") && (format->plus
-		|| format->space || format->zero || format->pound
-		|| format->precision))
+		|| format->space || format->zero || format->pound))
 		return (-1);
 	return (1);
 }
@@ -48,7 +44,7 @@ static	void	get_flags(const char *format_str, t_format *format, int *i)
 	}
 }
 
-static	int		ft_simple_atoi(const char *format_str, int *i, int *no_prec)
+static	int		ft_simple_atoi(const char *format_str, int *i)
 {
 	int nb;
 
@@ -57,7 +53,6 @@ static	int		ft_simple_atoi(const char *format_str, int *i, int *no_prec)
 	{
 		nb = (10 * nb) + (format_str[*i] - '0');
 		*i = *i + 1;
-		*no_prec = 0;
 	}
 	return (nb);
 }
@@ -83,23 +78,19 @@ int				manage_format(const char *format_str, t_format **format, int *i)
 	int len;
 	int no_prec;
 
+	no_prec = 1;
 	get_flags(format_str, *format, i);
-	len = ft_simple_atoi(format_str, i, &no_prec);
+	len = ft_simple_atoi(format_str, i);
 	(*format)->m_width = len;
 	if (format_str[*i] == '.')
-		*i = *i + 1;
-	no_prec = 1;
-	len = ft_simple_atoi(format_str, i, &no_prec);
-	(*format)->precision = len;
-	get_len_modifier(format_str, format, i);
-	if (char_in_str(format_str[*i], LEGAL_CONV))
 	{
-		(*format)->conversion = format_str[*i];
 		*i = *i + 1;
+		no_prec = 0;
 	}
-	else
-		return (-1);
-	if ((*format)->conversion == 'f' && no_prec)
-		(*format)->precision = -1;
+	len = ft_simple_atoi(format_str, i);
+	(*format)->precision = (no_prec ? -1 : len);
+	get_len_modifier(format_str, format, i);
+	(*format)->conversion = format_str[*i];
+	*i = *i + 1;
 	return (test_format(*format));
 }

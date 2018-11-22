@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/21 13:54:02 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 15:45:37 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,13 @@ static	char	*ft_itoa_long_long(const t_format *format,
 	return (str);
 }
 
-static	char	*join_width(const t_format *format, char **str, char **str_add)
+static	char	*join_width(const t_format *format, char **str, char **str_add,
+					unsigned long long nb)
 {
 	char	*sign;
 
 	sign = NULL;
-	if (format->pound)
+	if (format->pound && nb != 0)
 		sign = "0x";
 	if ((*str_add)[0] == '0')
 	{
@@ -87,7 +88,8 @@ static	char	*join_width(const t_format *format, char **str, char **str_add)
 	return (*str);
 }
 
-static	char	*add_width(const t_format *format, char **str)
+static	char	*add_width(const t_format *format, char **str,
+					unsigned long long nb)
 {
 	char	*str_add;
 	int		nb_spaces;
@@ -105,12 +107,12 @@ static	char	*add_width(const t_format *format, char **str)
 	i = 0;
 	while (i < nb_spaces)
 	{
-		str_add[i] = ((10 * format->precision + format->zero == 1)
+		str_add[i] = ((10 * format->precision + format->zero == -9)
 			? '0' : ' ');
 		i++;
 	}
 	str_add[i] = '\0';
-	*str = join_width(format, str, &str_add);
+	*str = join_width(format, str, &str_add, nb);
 	return (*str);
 }
 
@@ -120,17 +122,20 @@ int				ft_conv_x(t_format *format, va_list ap)
 	char				*str;
 
 	if (!ft_strncmp(format->data_format_modifier, "l", 2))
-		nb = (unsigned long long)va_arg(ap, long);
+		nb = (unsigned long long)va_arg(ap, unsigned long);
 	else if (!ft_strncmp(format->data_format_modifier, "ll", 2))
-		nb = (unsigned long long)va_arg(ap, long long);
+		nb = va_arg(ap, unsigned long long);
 	else if (!ft_strncmp(format->data_format_modifier, "h", 2))
-		nb = (unsigned long long)va_arg(ap, int);
+		nb = (unsigned long long)va_arg(ap, unsigned int);
 	else if (!ft_strncmp(format->data_format_modifier, "hh", 2))
-		nb = (unsigned long long)va_arg(ap, int);
+		nb = (unsigned long long)va_arg(ap, unsigned int);
 	else
-		nb = (unsigned long long)va_arg(ap, int);
-	str = ft_itoa_long_long(format, nb, "0123456789abcdef");
-	if (!(str = add_width(format, &str)))
+		nb = (unsigned long long)va_arg(ap, unsigned int);
+	if (nb == 0 && format->precision == 0)
+		str = ft_memalloc(1, 0);
+	else
+		str = ft_itoa_long_long(format, nb, "0123456789abcdef");
+	if (!(str = add_width(format, &str, nb)))
 	{
 		free_format(format);
 		return (-1);

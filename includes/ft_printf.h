@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 13:51:21 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 16:12:56 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 
 # include <stdarg.h>
 # include <string.h>
-
-
-
-#include <stdio.h>
-
-
 
 # define LEGAL_MOD "lhL"
 # define LEGAL_CONV "diouxXcspf%egbr"
@@ -58,13 +52,13 @@ int				ft_conv_s(t_format *format, va_list ap);
 int				ft_conv_p(t_format *format, va_list ap);
 int				ft_conv_f(t_format *format, va_list ap);
 int				ft_conv_percent(t_format *format, va_list ap);
+int				ft_conv_not(t_format *format, va_list ap);
 int				ft_usage(t_format *format, va_list ap);
 int				ft_printf(const char *format_str, ...);
-int				manage_format(const char *format_str, t_format **format, int *i);
-
+int				manage_format(const char *format_str, t_format **format,
+					int *i);
 
 void			ft_put_format(t_format *format);
-
 
 typedef	int		(*t_converter)(t_format *, va_list);
 typedef struct	s_conv

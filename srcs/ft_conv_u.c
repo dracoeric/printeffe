@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/21 13:53:50 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 15:02:17 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static	char	*add_width(const t_format *format, char **str)
 	i = 0;
 	while (i < nb_spaces)
 	{
-		str_add[i] = ((10 * format->precision + format->zero == 1)
+		str_add[i] = ((10 * format->precision + format->zero == -9)
 			? '0' : ' ');
 		i++;
 	}
@@ -116,16 +116,19 @@ int				ft_conv_u(t_format *format, va_list ap)
 	char				*str;
 
 	if (!ft_strncmp(format->data_format_modifier, "l", 2))
-		nb = (unsigned long long)va_arg(ap, long);
+		nb = (unsigned long long)va_arg(ap, unsigned long);
 	else if (!ft_strncmp(format->data_format_modifier, "ll", 2))
-		nb = (unsigned long long)va_arg(ap, long long);
+		nb = va_arg(ap, unsigned long long);
 	else if (!ft_strncmp(format->data_format_modifier, "h", 2))
-		nb = (unsigned long long)va_arg(ap, int);
+		nb = (unsigned long long)va_arg(ap, unsigned int);
 	else if (!ft_strncmp(format->data_format_modifier, "hh", 2))
-		nb = (unsigned long long)va_arg(ap, int);
+		nb = (unsigned long long)va_arg(ap, unsigned int);
 	else
-		nb = (unsigned long long)va_arg(ap, int);
-	str = ft_itoa_long_long(format, nb);
+		nb = (unsigned long long)va_arg(ap, unsigned int);
+	if (nb == 0 && format->precision == 0)
+		str = ft_memalloc(1, 0);
+	else
+		str = ft_itoa_long_long(format, nb);
 	if (!(str = add_width(format, &str)))
 	{
 		free_format(format);

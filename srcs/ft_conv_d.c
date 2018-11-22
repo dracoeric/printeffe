@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/21 13:53:37 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/22 15:35:18 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static	char	*add_width(const t_format *format, char **str, long long nb)
 	i = 0;
 	while (i < nb_spaces)
 	{
-		str_add[i] = ((10 * format->precision + format->zero == 1)
+		str_add[i] = ((10 * format->precision + format->zero == -9)
 			? '0' : ' ');
 		i++;
 	}
@@ -136,12 +136,15 @@ int				ft_conv_d(t_format *format, va_list ap)
 	else if (!ft_strncmp(format->data_format_modifier, "ll", 2))
 		nb = va_arg(ap, long long);
 	else if (!ft_strncmp(format->data_format_modifier, "h", 2))
-		nb = (long long)va_arg(ap, int);
+		nb = (long long)(short)va_arg(ap, int);
 	else if (!ft_strncmp(format->data_format_modifier, "hh", 2))
-		nb = (long long)va_arg(ap, int);
+		nb = (long long)(char)va_arg(ap, int);
 	else
 		nb = (long long)va_arg(ap, int);
-	str = ft_itoa_long_long(format, nb);
+	if (nb == 0 && format->precision == 0)
+		str = ft_memalloc(sizeof(char), 0);
+	else
+		str = ft_itoa_long_long(format, nb);
 	if (!(str = add_width(format, &str, nb)))
 	{
 		free_format(format);
