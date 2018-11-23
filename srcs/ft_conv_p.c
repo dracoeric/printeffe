@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/21 16:27:56 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/23 09:39:15 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ int				ft_conv_p(t_format *format, va_list ap)
 
 	nb = (unsigned long)va_arg(ap, void*);
 	str = ft_itoa_long_long(nb, "0123456789abcdef");
+	if (format->precision == 0)
+	{
+		free(str);
+		str = ft_memalloc(1, 0);
+	}
 	if (!(str = add_width(format, &str)))
 	{
 		free_format(format);

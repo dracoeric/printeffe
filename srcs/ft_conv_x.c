@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 15:45:37 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/23 09:46:16 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,9 @@ int				ft_conv_x(t_format *format, va_list ap)
 	else if (!ft_strncmp(format->data_format_modifier, "ll", 2))
 		nb = va_arg(ap, unsigned long long);
 	else if (!ft_strncmp(format->data_format_modifier, "h", 2))
-		nb = (unsigned long long)va_arg(ap, unsigned int);
+		nb = (unsigned long long)(unsigned short)va_arg(ap, int);
 	else if (!ft_strncmp(format->data_format_modifier, "hh", 2))
-		nb = (unsigned long long)va_arg(ap, unsigned int);
+		nb = (unsigned long long)(unsigned char)va_arg(ap, int);
 	else
 		nb = (unsigned long long)va_arg(ap, unsigned int);
 	if (nb == 0 && format->precision == 0)
