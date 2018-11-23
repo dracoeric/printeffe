@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/22 16:15:24 by erli             ###   ########.fr        #
+#    Updated: 2018/11/23 12:59:40 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -38,11 +38,13 @@ all			:		$(NAME)
 
 $(NAME)		:		$(OBJS) includes/ft_printf.h
 					ar -rucs $(NAME) $(OBJS)
-					ranlib $(NAME)
 
 $(OBJSDIR)/%.o			:		$(SRCSDIR)/%.c
 					@mkdir -p $(OBJSDIR)
 					$(CC) $(CFLAG) $(INCL) -c $< -o $@
+
+val			:		$(OBJS) includes/ft_printf.h
+					$(CC) -g $(CFLAG) $(INCL) -o  $(NAME) $(OBJS)
 
 clean		:
 					$(RM) $(OBJS)

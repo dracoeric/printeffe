@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 18:06:59 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/23 11:49:11 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int				manage_format(const char *format_str, t_format **format, int *i)
 	if (char_in_str(format_str[*i], LEGAL_CONV))
 		(*format)->conversion = format_str[(*i)++];
 	else
-		(*format)->conversion = '\0';
+		(*format)->conversion = (format_str[*i] == '\0' ? '\0'
+			: format_str[(*i)++]);
 	return (test_format(*format));
 }

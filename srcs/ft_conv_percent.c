@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 17:23:31 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/23 11:39:42 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static	char	*add_width(const t_format *format, char **str)
 	i = 0;
 	while (i < nb_spaces)
 	{
-		str_add[i] = ((10 * format->precision + format->zero == -9)
-			? '0' : ' ');
+		str_add[i] = (((10 * format->precision + format->zero == -9)
+			|| (10 * format->precision + format->zero == 1)) ? '0' : ' ');
 		i++;
 	}
 	str_add[i] = '\0';
