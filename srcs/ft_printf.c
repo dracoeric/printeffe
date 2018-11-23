@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 17:51:37 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/23 17:29:03 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static	int		get_converter(t_format *format, t_converter *fun)
 	return (1);
 }
 
-static	int		manage_dir(const char *format_str, int *i, va_list ap)
+static	int		manage_dir(const char *format_str, int *i, va_list ap,
+					t_list **list)
 {
 	t_format	*format;
 	t_converter	fun;
@@ -73,45 +74,49 @@ static	int		manage_dir(const char *format_str, int *i, va_list ap)
 	is_err = get_converter(format, &fun);
 	if (is_err == -1)
 		return (-1);
-	return (fun(format, ap));
+	return (fun(format, ap, list));
 }
 
-static	int		read_format_str(const char *format_str, va_list ap)
+static	int		read_format_str(const char *format_str, va_list ap,
+					t_list **list)
 {
 	int		i;
-	int		ret;
 	int		is_err;
+	char	*str;
+	int		j;
 
 	i = 0;
-	ret = 0;
 	is_err = 0;
 	while (format_str[i] != '\0' && is_err >= 0)
 	{
+		j = i;
 		while (format_str[i] != '%' && format_str[i] != '\0' && is_err >= 0)
-		{
-			is_err = write(1, &(format_str[i]), 1);
-			ret += is_err;
 			i++;
-		}
+		if (!(str = ft_strsub((char *)format_str, j, i - 1)) && i > j)
+			return (lst_dellall(list));
+		is_err = lst_addback(list, &str, (i - j));
+		if (is_err == -1)
+			return (lst_dellall(list));
 		if (format_str[i] == '%' && is_err >= 0)
 		{
 			i++;
-			is_err = manage_dir(format_str, &i, ap);
-			ret += is_err;
+			is_err = manage_dir(format_str, &i, ap, list);
 		}
 	}
-	if (is_err < 0)
-		return (-1);
-	return (ret);
+	return (is_err == -1 ? -1 : 1);
 }
 
 int				ft_printf(const char *format_str, ...)
 {
 	va_list	ap;
-	int		ret;
+	t_list	*list;
+	int		is_err;
 
 	va_start(ap, format_str);
-	ret = read_format_str(format_str, ap);
+	list = NULL;
+	is_err = read_format_str(format_str, ap, &list);
 	va_end(ap);
-	return (ret);
+	if (is_err == -1)
+		return (-1);
+	return (lst_unload(&list));
 }

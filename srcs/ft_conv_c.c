@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/23 09:19:23 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/23 16:39:19 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static	unsigned char	*add_width(t_format *format, char c, int *len)
 	return (str);
 }
 
-int						ft_conv_c(t_format *format, va_list ap)
+int						ft_conv_c(t_format *format, va_list ap, t_list **list)
 {
 	unsigned char	*str;
 	unsigned char	c;
@@ -52,8 +52,8 @@ int						ft_conv_c(t_format *format, va_list ap)
 	if (str == NULL)
 	{
 		free_format(format);
-		return (-1);
+		return (lst_dellall(list));
 	}
 	free_format(format);
-	return (write_free(1, (char **)(&str), len + 1));
+	return (lst_addback(list, (char **)(&str), len + 1));
 }

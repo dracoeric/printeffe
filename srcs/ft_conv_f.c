@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 13:33:10 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/23 16:39:50 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ static	char	*add_width(const t_format *format, char **str, long double nb)
 	return (*str);
 }
 
-int				ft_conv_f(t_format *format, va_list ap)
+int				ft_conv_f(t_format *format, va_list ap, t_list **list)
 {
 	long double	nb;
 	char		*str;
@@ -143,8 +143,8 @@ int				ft_conv_f(t_format *format, va_list ap)
 	if (!(str = add_width(format, &str, nb)))
 	{
 		free_format(format);
-		return (-1);
+		return (lst_dellall(list));
 	}
 	free_format(format);
-	return (write_free(1, &str, ft_strlen(str)));
+	return (lst_addback(list, &str, ft_strlen(str)));
 }

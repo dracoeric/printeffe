@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/23 12:59:40 by erli             ###   ########.fr        #
+#    Updated: 2018/11/23 14:43:00 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -17,7 +17,7 @@ SRCSDIR		=		srcs
 OBJSDIR		=		objs
 
 SRCS		=		ft_printf.c		ft_conv_d.c		ft_put_format.c		\
-					ft_conv_not.c	ft_util.c							\
+					ft_conv_not.c	ft_util.c		ft_list_manip.c		\
 					manage_format.c	ft_conv_o.c		ft_free_format.c	\
 					ft_util2.c		ft_conv_u.c		ft_conv_x.c			\
 					ft_conv_big_x.c	ft_conv_c.c		ft_conv_s.c			\

@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/23 11:30:52 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/23 16:41:00 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	char	*add_width(t_format *format, char **str_arg)
 	return (str);
 }
 
-int				ft_conv_s(t_format *format, va_list ap)
+int				ft_conv_s(t_format *format, va_list ap, t_list **list)
 {
 	char	*str;
 	char	*str_arg;
@@ -47,7 +47,9 @@ int				ft_conv_s(t_format *format, va_list ap)
 	if (str_arg == NULL && !format->zero && !format->m_width)
 	{
 		free_format(format);
-		return (write(1, "(null)", 6));
+		if (!(str_arg = ft_strsub("(null)", 0, 5)))
+			return (lst_dellall(list));
+		return (lst_addback(list, &str_arg, 6));
 	}
 	if (format->precision > 0)
 		str_arg = ft_strsub(str_arg, 0, format->precision - 1);
@@ -58,8 +60,8 @@ int				ft_conv_s(t_format *format, va_list ap)
 	if (!(str = add_width(format, &str_arg)))
 	{
 		free_format(format);
-		return (-1);
+		return (lst_dellall(list));
 	}
 	free_format(format);
-	return (write_free(1, (char **)(&str), ft_strlen((char *)str)));
+	return (lst_addback(list, (char **)(&str), ft_strlen((char *)str)));
 }
