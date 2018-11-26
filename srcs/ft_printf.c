@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/23 17:29:03 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/26 11:20:03 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,12 @@ static	int		read_format_str(const char *format_str, va_list ap,
 		j = i;
 		while (format_str[i] != '%' && format_str[i] != '\0' && is_err >= 0)
 			i++;
-		if (!(str = ft_strsub((char *)format_str, j, i - 1)) && i > j)
-			return (lst_dellall(list));
-		is_err = lst_addback(list, &str, (i - j));
-		if (is_err == -1)
-			return (lst_dellall(list));
+		if (i > j)
+		{
+			if (!(str = ft_strsub((char *)format_str, j, i - 1))
+				|| lst_addback(list, &str, (i - j)) == -1)
+				return (lst_dellall(list));
+		}
 		if (format_str[i] == '%' && is_err >= 0)
 		{
 			i++;

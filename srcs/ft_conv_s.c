@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/23 16:41:00 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/26 09:09:19 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ int				ft_conv_s(t_format *format, va_list ap, t_list **list)
 		return (lst_dellall(list));
 	}
 	free_format(format);
-	return (lst_addback(list, (char **)(&str), ft_strlen((char *)str)));
+	return (lst_addback(list, &str, ft_strlen(str)));
 }
