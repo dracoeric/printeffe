@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/23 16:39:50 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/26 16:27:51 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	char	*ft_itoa_long_long(const t_format *format, long double nb)
 		nb = (10 * nb) - (pow / 10) * (int)(str[i] - '0');
 		i++;
 	}
-	ft_round_up(&str, (int)(pow * nb));
+	ft_round_up(&str, (int)(pow * nb), 'f', ft_strlen(str) - 1);
 	return (str);
 }
 
@@ -121,8 +121,7 @@ static	char	*add_width(const t_format *format, char **str, long double nb)
 	i = 0;
 	while (i < nb_spaces)
 	{
-		str_add[i] = ((10 * format->precision + format->zero == 1)
-			? '0' : ' ');
+		str_add[i] = (format->zero ? '0' : ' ');
 		i++;
 	}
 	str_add[i] = '\0';

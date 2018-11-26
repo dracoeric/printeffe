@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/23 17:24:34 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/26 16:18:35 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void			*ft_memalloc(size_t n, int c);
 int				write_free(int fd, char **str, size_t n);
 void			free_format(t_format *format);
 char			*ft_strsub(char *str, size_t begin, size_t end);
-void			ft_round_up(char **str, int rest);
+void			ft_round_up(char **str, int rest, char c, int i);
+void			ft_round_up_slide(char **str);
 int				ft_conv_d(t_format *format, va_list ap, t_list **list);
 int				ft_conv_o(t_format *format, va_list ap, t_list **list);
 int				ft_conv_u(t_format *format, va_list ap, t_list **list);
@@ -66,6 +67,7 @@ int				ft_conv_c(t_format *format, va_list ap, t_list **list);
 int				ft_conv_s(t_format *format, va_list ap, t_list **list);
 int				ft_conv_p(t_format *format, va_list ap, t_list **list);
 int				ft_conv_f(t_format *format, va_list ap, t_list **list);
+int				ft_conv_e(t_format *format, va_list ap, t_list **list);
 int				ft_conv_percent(t_format *format, va_list ap, t_list **list);
 int				ft_conv_not(t_format *format, va_list ap, t_list **list);
 int				ft_printf(const char *format_str, ...);

@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 11:28:08 by erli              #+#    #+#             */
-/*   Updated: 2018/11/26 15:44:25 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/26 16:27:31 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static	char	*ft_itoa_e(const t_format *format, long double nb)
 
 	if (!(str = make_str(format, nb, &pow, &expo)))
 		return (NULL);
-	nb = ft_round_up_e(format, nb, pow, expo);
 	nb = (expo < 0 ? nb * pow : nb / pow);
 	str[0] = (int)(nb) + '0';
 	i = 1;
@@ -69,6 +68,7 @@ static	char	*ft_itoa_e(const t_format *format, long double nb)
 	str[i] = ((expo * (44 - str[i - 1])) > 9 ? (expo / 10) + '0' : '0');
 	i++;
 	str[i] = (expo * (44 - str[i - 2])) % 10 + '0';
+	ft_round_up(&str, 10 * (nb - (int)nb), 'e', ft_strlen(str) - 5);
 	return (str);
 }
 
@@ -121,7 +121,7 @@ static	char	*add_width(const t_format *format, char **str, long double nb)
 	i = 0;
 	while (i < nb_spaces)
 	{
-		str_add[i] = (format->zero == 1	? '0' : ' ');
+		str_add[i] = (format->zero == 1 ? '0' : ' ');
 		i++;
 	}
 	str_add[i] = '\0';

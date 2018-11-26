@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:34:17 by erli              #+#    #+#             */
-/*   Updated: 2018/11/22 13:33:04 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/26 16:26:01 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-void	*ft_memalloc(size_t n, int c)
+void		*ft_memalloc(size_t n, int c)
 {
 	void			*ptr;
 	size_t			i;
@@ -32,7 +32,7 @@ void	*ft_memalloc(size_t n, int c)
 	return (ptr);
 }
 
-int		write_free(int fd, char **str, size_t n)
+int			write_free(int fd, char **str, size_t n)
 {
 	int ret;
 
@@ -41,7 +41,7 @@ int		write_free(int fd, char **str, size_t n)
 	return (ret);
 }
 
-char	*ft_strsub(char *str, size_t begin, size_t end)
+char		*ft_strsub(char *str, size_t begin, size_t end)
 {
 	char	*sub;
 	size_t	i;
@@ -61,23 +61,20 @@ char	*ft_strsub(char *str, size_t begin, size_t end)
 	return (sub);
 }
 
-void	ft_round_up(char **str, int rest)
+void		ft_round_up(char **str, int rest, char c, int i)
 {
-	int		i;
-	int		done;
 	char	*add;
+	int		done;
 
-	add = "1";
 	done = 0;
-	if (*str == NULL)
-		return ;
-	i = ft_strlen(*str) - 1;
+	add = "1";
+	printf("rest = %d\n", rest);
 	if (rest >= 5)
 	{
-		while (i >= 0 && done == 0)
+		while (done == 0 && i >= 0)
 		{
 			if ((*str)[i] == '9')
-				(*str)[i] = '0';
+				((*str)[i] = '0');
 			else if ((*str)[i] >= '0' && (*str)[i] <= '8')
 			{
 				(*str)[i]++;
@@ -85,7 +82,23 @@ void	ft_round_up(char **str, int rest)
 			}
 			i--;
 		}
-		if (done == 0 && (*str)[0] == '0')
+		if ((*str)[0] == '0' && c == 'f' && done == 0)
 			*str = ft_strjoinfree(&add, str, 2);
+		else if ((*str)[0] == '0' && c == 'e' && done == 0)
+			ft_round_up_slide(str);
 	}
+}
+
+void		ft_round_up_slide(char **str)
+{
+	int		i;
+
+	ft_round_up(str, 6, 'f', ft_strlen(*str) - 1);
+	i = ft_strlen(*str) - 5;
+	while (i > 0)
+	{
+		(*str)[i] = (*str)[i - 1];
+		i--;
+	}
+	(*str)[0] = '1';
 }
