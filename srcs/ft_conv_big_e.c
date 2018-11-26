@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_convert_f.c                                     :+:      :+:    :+:   */
+/*   ft_conv_e.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/26 17:37:44 by erli             ###   ########.fr       */
+/*   Created: 2018/11/26 11:28:08 by erli              #+#    #+#             */
+/*   Updated: 2018/11/26 17:04:55 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,23 @@
 #include <stdlib.h>
 
 static	char	*make_str(const t_format *format, long double nb,
-					long double *pow)
+					long double *pow, int *expo)
 {
 	char	*str;
 	int		str_len;
 
 	*pow = 1;
+	*expo = 0;
 	if (nb < 0)
 		*pow = -1;
-	str_len = 1;
-	if (nb <= -10)
-	{
-		str_len = str_len + 1;
+	if (nb < -10 && (*expo)++ == 0)
 		*pow = -10;
-	}
-	while (nb / *pow >= 10)
+	while ((*pow * nb < 1 || nb / *pow > 10) && nb != 0)
 	{
 		*pow *= 10;
-		str_len = str_len + 1;
+		expo++;
 	}
+	str_len = 5;
 	if (format->precision == -1)
 		str_len += 7;
 	else if (format->precision > 0)
@@ -40,42 +38,44 @@ static	char	*make_str(const t_format *format, long double nb,
 	if (!(str = (char *)ft_memalloc(sizeof(char) * (str_len + 1), 32)))
 		return (0);
 	str[str_len] = '\0';
+	if (nb < 1 && nb > -1)
+		*expo *= -1;
 	return (str);
 }
 
-static	char	*ft_itoa_long_long(const t_format *format, long double nb)
+static	char	*ft_itoa_e(const t_format *format, long double nb)
 {
 	long double	pow;
-	char		*str;
+	int			expo;
 	int			i;
+	char		*str;
 
-	if (!(str = make_str(format, nb, &pow)))
-		return (0);
-	i = 0;
-	while (pow >= 1 || pow <= -1)
-	{
-		str[i] = (int)(nb / pow) + '0';
-		nb = nb - (pow * (int)(str[i] - '0'));
-		pow /= 10;
-		i++;
-	}
+	if (!(str = make_str(format, nb, &pow, &expo)))
+		return (NULL);
+	nb = (expo < 0 ? nb * pow : nb / pow);
+	str[0] = (int)(nb) + '0';
+	i = 1;
 	if (format->precision != 0)
 		str[i++] = '.';
-	pow = (nb < 0 ? -10 : 10);
-	while (i < ft_strlen(str))
+	while ((format->precision > 0 && i < format->precision + 2)
+		|| (format->precision == -1 && i < 8))
 	{
-		str[i] = (int)(pow * nb) + '0';
-		nb = (10 * nb) - (pow / 10) * (int)(str[i] - '0');
-		i++;
+		nb = 10 * (nb - (int)nb);
+		str[i++] = (int)nb + '0';
 	}
-	ft_round_up(&str, (int)(pow * nb), 'f', ft_strlen(str) - 1);
+	str[i++] = 'E';
+	str[i++] = (expo < 0 ? '-' : '+');
+	str[i] = ((expo * (44 - str[i - 1])) > 9 ? (expo / 10) + '0' : '0');
+	i++;
+	str[i] = (expo * (44 - str[i - 2])) % 10 + '0';
+	ft_round_up(&str, 10 * (nb - (int)nb), 'e', ft_strlen(str) - 5);
 	return (str);
 }
 
 static	char	*join_width(const t_format *format, char **str, char **str_add,
 					long double nb)
 {
-	char	*sign;
+	char *sign;
 
 	sign = NULL;
 	if (nb < 0)
@@ -109,19 +109,19 @@ static	char	*add_width(const t_format *format, char **str, long double nb)
 	int		i;
 
 	if (*str == NULL)
-		return (0);
+		return (NULL);
 	nb_spaces = format->m_width - (ft_strlen(*str)
 		+ (nb < 0 || format->space || format->plus));
 	if (nb_spaces > 0)
 		str_add = (char *)malloc(sizeof(char) * (nb_spaces + 1));
 	else
-		str_add = (char *)ft_memalloc(sizeof(char) * 1, 0);
+		str_add = (char *)ft_memalloc(1, 0);
 	if (str_add == NULL)
-		return (0);
+		return (NULL);
 	i = 0;
 	while (i < nb_spaces)
 	{
-		str_add[i] = (format->zero ? '0' : ' ');
+		str_add[i] = (format->zero == 1 ? '0' : ' ');
 		i++;
 	}
 	str_add[i] = '\0';
@@ -129,7 +129,7 @@ static	char	*add_width(const t_format *format, char **str, long double nb)
 	return (*str);
 }
 
-int				ft_conv_f(t_format *format, va_list ap, t_list **list)
+int				ft_conv_big_e(t_format *format, va_list ap, t_list **list)
 {
 	long double	nb;
 	char		*str;
@@ -138,7 +138,7 @@ int				ft_conv_f(t_format *format, va_list ap, t_list **list)
 		nb = va_arg(ap, long double);
 	else
 		nb = (long double)va_arg(ap, double);
-	str = ft_itoa_long_long(format, nb);
+	str = ft_itoa_e(format, nb);
 	if (!(str = add_width(format, &str, nb)))
 	{
 		free_format(format);

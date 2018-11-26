@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 15:34:17 by erli              #+#    #+#             */
-/*   Updated: 2018/11/26 16:26:01 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/26 16:31:32 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void		ft_round_up(char **str, int rest, char c, int i)
 
 	done = 0;
 	add = "1";
-	printf("rest = %d\n", rest);
 	if (rest >= 5)
 	{
 		while (done == 0 && i >= 0)

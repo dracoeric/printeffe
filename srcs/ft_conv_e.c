@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 11:28:08 by erli              #+#    #+#             */
-/*   Updated: 2018/11/26 16:27:31 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/26 16:44:57 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static	char	*make_str(const t_format *format, long double nb,
 		*pow = -1;
 	if (nb < -10 && (*expo)++ == 0)
 		*pow = -10;
-	while (*pow * nb < 1 || nb / *pow > 10)
+	while ((*pow * nb < 1 || nb / *pow > 10) && nb != 0)
 	{
 		*pow *= 10;
-		expo++;
+		(*expo)++;
 	}
 	str_len = 5;
 	if (format->precision == -1)
@@ -39,7 +39,7 @@ static	char	*make_str(const t_format *format, long double nb,
 		return (0);
 	str[str_len] = '\0';
 	if (nb < 1 && nb > -1)
-		*expo *= -1;
+		*expo = -*expo;
 	return (str);
 }
 
