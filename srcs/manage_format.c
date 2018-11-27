@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 09:19:20 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 15:40:14 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	int		test_format(t_format *format)
 
 static	void	get_flags(const char *format_str, t_format *format, int *i)
 {
-	while (char_in_str(format_str[*i], "#0+- "))
+	while (char_in_str(format_str[*i], "t#0+- "))
 	{
 		if (format_str[*i] == '#')
 			format->pound = 1;
@@ -35,6 +35,8 @@ static	void	get_flags(const char *format_str, t_format *format, int *i)
 			format->zero = 1;
 		if (format_str[*i] == ' ')
 			format->space = 1;
+		if (format_str[*i] == 't')
+			format->pointer = 1;
 		*i = *i + 1;
 	}
 }
