@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 17:32:00 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 18:23:34 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,15 @@ int				ft_conv_o_ptrohh(t_format *format, va_list ap, t_list **list);
 int				ft_conv_o_ptroh(t_format *format, va_list ap, t_list **list);
 int				ft_conv_o_ptro(t_format *format, va_list ap, t_list **list);
 int				ft_conv_o_ptr(t_format *format, va_list ap, t_list **list);
+int				ft_conv_f_ptr(t_format *format, va_list ap, t_list **list);
+int				ft_conv_f_ptrfl(t_format *format, va_list ap, t_list **list);
+int				ft_conv_f_ptrfbigl(t_format *format, va_list ap, t_list **list);
+int				ft_conv_e_ptr(t_format *format, va_list ap, t_list **list);
+int				ft_conv_e_ptrel(t_format *format, va_list ap, t_list **list);
+int				ft_conv_e_ptrebigl(t_format *format, va_list ap, t_list **list);
+int				ft_conv_g_ptr(t_format *format, va_list ap, t_list **list);
+int				ft_conv_g_ptrgl(t_format *format, va_list ap, t_list **list);
+int				ft_conv_g_ptrgbigl(t_format *format, va_list ap, t_list **list);
 int				ft_conv_o(t_format *format, va_list ap, t_list **list);
 int				ft_conv_u(t_format *format, va_list ap, t_list **list);
 int				ft_conv_x(t_format *format, va_list ap, t_list **list);

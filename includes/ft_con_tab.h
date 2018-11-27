@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:20:49 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 17:31:28 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 18:23:59 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,14 @@ t_conv	g_conv_tab_ptr[] =
 */	{'d', &ft_conv_d_ptr},
 	{'i', &ft_conv_d_ptr},
 	{'o', &ft_conv_o_ptr},
-/*	{'u', &ft_conv_u_ptr},
-	{'x', &ft_conv_x_ptr},
-	{'X', &ft_conv_big_x_ptr},
+	{'u', &ft_conv_o_ptr},
+	{'x', &ft_conv_o_ptr},
+	{'X', &ft_conv_o_ptr},
 	{'f', &ft_conv_f_ptr},
 	{'F', &ft_conv_f_ptr},
 	{'e', &ft_conv_e_ptr},
-	{'E', &ft_conv_big_e_ptr},
+	{'E', &ft_conv_e_ptr},
 	{'g', &ft_conv_g_ptr},
-	{'%', &ft_conv_percent},*/
 	{'\0', &ft_conv_not}
 };
 

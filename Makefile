@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/27 17:27:18 by erli             ###   ########.fr        #
+#    Updated: 2018/11/27 18:24:24 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -30,6 +30,9 @@ SRCS		=		ft_printf.c		ft_conv_d.c		ft_put_format.c		\
 					ft_conv_d_ptrdh.c				ft_conv_o_ptro.c	\
 					ft_conv_o_ptroh.c				ft_conv_o_ptrol.c	\
 					ft_conv_o_ptrohh.c				ft_conv_o_ptroll.c	\
+					ft_conv_f_ptrfl.c				ft_conv_f_ptrfbigl.c\
+					ft_conv_e_ptrel.c				ft_conv_e_ptrebigl.c\
+					ft_conv_g_ptrgl.c				ft_conv_g_ptrgbigl.c\
 					main.c
 
 OBJS		=		$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
@@ -45,7 +48,7 @@ RM			=		rm -f
 
 all			:		$(NAME)
 
-$(NAME)		:		$(OBJS) includes/ft_printf.h
+$(NAME)		:		$(OBJS) includes/ft_printf.h includes/ft_con_tab.h
 					$(CC) $(CFLAG) $(INCL) -o  $(NAME) $(OBJS)
 
 $(OBJSDIR)/%.o			:		$(SRCSDIR)/%.c
