@@ -6,14 +6,14 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 17:25:53 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 17:33:04 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdlib.h>
 
-static	int		max_width(const t_format *format, unsigned short *tab, int len)
+static	int		max_width(const t_format *format, unsigned int *tab, int len)
 {
 	int			width;
 	long long	pow;
@@ -38,7 +38,7 @@ static	int		max_width(const t_format *format, unsigned short *tab, int len)
 	return (format->m_width > max ? format->m_width : max);
 }
 
-static	int		make_list_tmp(t_format *format, unsigned short *tab, int len,
+static	int		make_list_tmp(t_format *format, unsigned int *tab, int len,
 					t_list **list_tmp)
 {
 	t_format	*format_tab;
@@ -121,11 +121,11 @@ static	int		add_list_tmp(t_list **list_tmp, t_list **list)
 
 int				ft_conv_o_ptro(t_format *format, va_list ap, t_list **list)
 {
-	unsigned short		*nb_tab;
+	unsigned int		*nb_tab;
 	int					len;
 	t_list				*list_tmp;
 
-	nb_tab = va_arg(ap, unsigned short*);
+	nb_tab = va_arg(ap, unsigned int*);
 	len = va_arg(ap, int);
  	list_tmp = NULL;
 	if (make_list_tmp(format, nb_tab, len, &list_tmp) == -1)

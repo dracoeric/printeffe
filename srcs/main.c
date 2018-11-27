@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 09:56:28 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 17:09:50 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 17:33:30 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		main(void)
 	int fd;
 	int prec;
 	int width;
-	char tab[4];
+	unsigned short tab[4];
 
 
 	tab[0] = 10;
@@ -56,9 +56,9 @@ int		main(void)
 	str = ft_memalloc(10, 48);
 	str2 = "caca";
 	str[9] = 0;
-	ret = printf("\ns: '%*.*g\n", width, prec, f );
+	ret = printf("\ns: '%*.*o\n", width, prec, tab[1] );
 	printf("\nret = %d\n", ret);
-	ret = ft_printf("\ns: '%t*.*hhd\n", width, prec, tab, 4);
+	ret = ft_printf("\ns: '%t*.*ho\n", width, prec, tab, 4);
 	printf("\nret = %d\n", ret);
 	free(str);
 	return (0);
