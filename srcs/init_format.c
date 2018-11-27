@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 13:28:45 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 15:32:21 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 17:18:45 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int		copy_format(t_format **format, t_format *source)
 	(*format)->plus = source->plus;
 	(*format)->minus = source->minus;
 	(*format)->zero = source->zero;
-	(*format)->space = source->space;	
-	(*format)->pointer = source->pointer;	
+	(*format)->space = source->space;
+	(*format)->pointer = source->pointer;
 	(*format)->m_width = source->m_width;
 	(*format)->precision = source->precision;
 	if (!((*format)->data_format_modifier = (char *)malloc(sizeof(char) * 3)))

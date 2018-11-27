@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/27 15:22:08 by erli             ###   ########.fr        #
+#    Updated: 2018/11/27 17:27:18 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,8 +23,14 @@ SRCS		=		ft_printf.c		ft_conv_d.c		ft_put_format.c		\
 					ft_conv_big_x.c	ft_conv_c.c		ft_conv_s.c			\
 					ft_conv_p.c		ft_conv_f.c		ft_conv_percent.c	\
 					ft_conv_e.c		ft_conv_big_e.c	ft_conv_g.c			\
-					ft_conv_d_ptr.c	ft_strdup.c		init_format.c		\
-					get_converter.c	main.c
+					ft_conv_tab.c	ft_strdup.c		init_format.c		\
+					get_converter.c	ft_conv_d_ptrd.c					\
+					ft_loophole.c	ft_conv_d_ptrdhh.c					\
+					ft_conv_d_ptrdl.c				ft_conv_d_ptrdll.c	\
+					ft_conv_d_ptrdh.c				ft_conv_o_ptro.c	\
+					ft_conv_o_ptroh.c				ft_conv_o_ptrol.c	\
+					ft_conv_o_ptrohh.c				ft_conv_o_ptroll.c	\
+					main.c
 
 OBJS		=		$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
 

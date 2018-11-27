@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 11:28:08 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 12:53:11 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 17:17:28 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ int				ft_conv_g(t_format *format, va_list ap, t_list **list)
 		c = 'e';
 	tmp = format->m_width;
 	format->precision = (format->precision == 0 ? 0 : format->precision - 1);
-	ret = (c == 'f' ? ft_conv_f(format, ap, list) : ft_conv_e(format, ap, list));
+	ret = (c == 'f' ? ft_conv_f(format, ap, list)
+		: ft_conv_e(format, ap, list));
 	remove_zeros(list, c, tmp);
 	return (ret);
 }

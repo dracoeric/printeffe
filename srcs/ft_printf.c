@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 15:39:11 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 16:29:10 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static	int		manage_dir(const char *format_str, int *i, va_list ap,
 		free_format(format);
 		return (-1);
 	}
-	ft_put_format(format);
 	is_err = get_converter(format, &fun);
 	if (is_err == -1)
 		return (-1);
