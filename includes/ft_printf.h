@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 18:40:29 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 18:47:29 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct	s_conv
 	char		symbol;
 	t_converter converter;
 }				t_conv;
-
 
 int				init_format(t_format **format);
 int				copy_format(t_format **format, t_format *source);
@@ -114,9 +113,7 @@ int				ft_conv_percent(t_format *format, va_list ap, t_list **list);
 int				ft_conv_not(t_format *format, va_list ap, t_list **list);
 int				ft_printf(const char *format_str, ...);
 int				manage_format(const char *format_str, t_format **format,
-							  int *i, va_list ap);
-
+					int *i, va_list ap);
 void			ft_put_format(t_format *format);
-
 
 #endif
