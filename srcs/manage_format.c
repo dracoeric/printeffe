@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/23 11:49:11 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 09:19:20 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,16 @@ static	void	get_flags(const char *format_str, t_format *format, int *i)
 	}
 }
 
-static	int		ft_simple_atoi(const char *format_str, int *i)
+static	int		ft_simple_atoi(const char *format_str, int *i, va_list ap)
 {
 	int nb;
 
 	nb = 0;
+	if (format_str[*i] == '*')
+	{
+		*i = *i + 1;
+		nb = va_arg(ap, int);
+	}
 	while (format_str[*i] >= '0' && format_str[*i] <= '9' && *i)
 	{
 		nb = (10 * nb) + (format_str[*i] - '0');
@@ -68,14 +73,15 @@ static	void	get_len_modifier(const char *format_str, t_format **format,
 	}
 }
 
-int				manage_format(const char *format_str, t_format **format, int *i)
+int				manage_format(const char *format_str, t_format **format, int *i,
+					va_list ap)
 {
 	int len;
 	int no_prec;
 
 	no_prec = 1;
 	get_flags(format_str, *format, i);
-	len = ft_simple_atoi(format_str, i);
+	len = ft_simple_atoi(format_str, i, ap);
 	(*format)->m_width = len;
 	while (char_in_str(format_str[*i], "#0-+ .jzlhL"))
 	{
@@ -83,7 +89,7 @@ int				manage_format(const char *format_str, t_format **format, int *i)
 		{
 			*i = *i + 1;
 			no_prec = 0;
-			len = ft_simple_atoi(format_str, i);
+			len = ft_simple_atoi(format_str, i, ap);
 			(*format)->precision = (no_prec ? -1 : len);
 		}
 		get_flags(format_str, *format, i);

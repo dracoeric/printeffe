@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 11:28:08 by erli              #+#    #+#             */
-/*   Updated: 2018/11/26 17:41:58 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 12:53:11 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,36 @@ static	int		find_expo(long double nb)
 	return (expo);
 }
 
-static	void	remove_zeros(t_list **list, char c)
+static	void	add_width(t_list **list, int width)
+{
+	t_list	*bubble;
+	int		len;
+	int		offset;
+	int		i;
+	int		j;
+
+	bubble = *list;
+	while (bubble->next != NULL)
+		bubble = bubble->next;
+	len = bubble->len;
+	offset = width - len;
+	i = len - 1 + offset;
+	j = 0;
+	while (j < len)
+	{
+		(bubble->content)[i - j] = (bubble->content)[i - j - offset];
+		j++;
+	}
+	j = 0;
+	while (j < offset)
+	{
+		(bubble->content)[j] = ' ';
+		j++;
+	}
+	bubble->len = len + offset;
+}
+
+static	void	remove_zeros(t_list **list, char c, int width)
 {
 	t_list	*bubble;
 	int		len;
@@ -60,32 +89,30 @@ static	void	remove_zeros(t_list **list, char c)
 		i++;
 	}
 	bubble->len = len;
+	add_width(list, width);
 }
 
 int				ft_conv_g(t_format *format, va_list ap, t_list **list)
 {
 	long double	nb;
-	int			expo;
+	int			tmp;
 	va_list		copy;
 	int			ret;
+	char		c;
 
+	c = 'f';
 	va_copy(copy, ap);
 	if (!ft_strncmp(format->data_format_modifier, "L", 2))
 		nb = va_arg(copy, long double);
 	else
 		nb = (long double)va_arg(copy, double);
-	expo = find_expo(nb);
+	tmp = find_expo(nb);
 	va_end(copy);
-	if (expo < -4 || expo >= (format->precision == -1 ? 6 : format->precision))
-	{
-		format->precision = (format->precision == 0 ? 0
-			: format->precision - 1);
-		ret = ft_conv_e(format, ap, list);
-		remove_zeros(list, 'e');
-		return (ret);
-	}
+	if (tmp < -4 || tmp >= (format->precision == -1 ? 6 : format->precision))
+		c = 'e';
+	tmp = format->m_width;
 	format->precision = (format->precision == 0 ? 0 : format->precision - 1);
-	ret = ft_conv_f(format, ap, list);
-	remove_zeros(list, 'f');
+	ret = (c == 'f' ? ft_conv_f(format, ap, list) : ft_conv_e(format, ap, list));
+	remove_zeros(list, c, tmp);
 	return (ret);
 }

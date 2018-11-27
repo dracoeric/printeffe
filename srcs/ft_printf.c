@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/26 14:24:19 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 09:06:32 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static	int		manage_dir(const char *format_str, int *i, va_list ap,
 	is_err = init_format(&format);
 	if (is_err == -1)
 		return (-1);
-	is_err = manage_format(format_str, &format, i);
+	is_err = manage_format(format_str, &format, i, ap);
 	if (is_err == -1)
 	{
 		free_format(format);
