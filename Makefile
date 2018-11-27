@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/27 18:24:24 by erli             ###   ########.fr        #
+#    Updated: 2018/11/27 18:40:01 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -33,6 +33,8 @@ SRCS		=		ft_printf.c		ft_conv_d.c		ft_put_format.c		\
 					ft_conv_f_ptrfl.c				ft_conv_f_ptrfbigl.c\
 					ft_conv_e_ptrel.c				ft_conv_e_ptrebigl.c\
 					ft_conv_g_ptrgl.c				ft_conv_g_ptrgbigl.c\
+					ft_conv_s_ptrs.c				ft_conv_p_ptrp.c	\
+					ft_conv_c_ptrc.c	\
 					main.c
 
 OBJS		=		$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 09:56:28 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 18:24:48 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 18:38:42 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ int		main(void)
 	int fd;
 	int prec;
 	int width;
-	double tab[4];
+	char tab[4];
 
 
-	tab[0] = 10;
-	tab[1] = 20;
-	tab[2] = 30;
-	tab[3] = 40;
+	tab[0] = 'a';
+	tab[1] = 'v';
+	tab[2] = 'c';
+	tab[3] = 's';
 	fd = open("/Users/erli/HolyGraph/MyRepo/ft_printf/deg.txt", O_WRONLY, O_APPEND);
 	printf("fd = %d\n", fd);
 	write(fd, "caca\n", 5);
@@ -56,9 +56,9 @@ int		main(void)
 	str = ft_memalloc(10, 48);
 	str2 = "caca";
 	str[9] = 0;
-	ret = printf("\ns: '%*.*e\n", width, prec, tab[0] );
+	ret = printf("\ns: '%*.*d\n", width, prec, i );
 	printf("\nret = %d\n", ret);
-	ret = ft_printf("\ns: '%t*.*g\n", width, prec, tab, 4);
+	ret = ft_printf("\ns: '%t*.*c\n", width, prec, tab, 4);
 	printf("\nret = %d\n", ret);
 	free(str);
 	return (0);

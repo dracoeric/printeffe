@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/16 11:20:49 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 18:23:59 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/27 18:40:43 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ t_conv	g_conv_tab[] =
 
 t_conv	g_conv_tab_ptr[] =
 {
-/*	{'c', &ft_conv_c_ptr},
-	{'s', &ft_conv_s_ptr},
-	{'p', &ft_conv_p_ptr},
-*/	{'d', &ft_conv_d_ptr},
+	{'c', &ft_conv_c_ptrc},
+	{'s', &ft_conv_s_ptrs},
+	{'p', &ft_conv_p_ptrp},
+	{'d', &ft_conv_d_ptr},
 	{'i', &ft_conv_d_ptr},
 	{'o', &ft_conv_o_ptr},
 	{'u', &ft_conv_o_ptr},
