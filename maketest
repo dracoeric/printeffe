@@ -6,11 +6,11 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/27 18:44:21 by erli             ###   ########.fr        #
+#    Updated: 2018/11/28 08:54:31 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
-NAME		=		libftprintf.a
+NAME		=		test
 
 SRCSDIR		=		srcs
 
@@ -34,7 +34,8 @@ SRCS		=		ft_printf.c		ft_conv_d.c		ft_put_format.c		\
 					ft_conv_e_ptrel.c				ft_conv_e_ptrebigl.c\
 					ft_conv_g_ptrgl.c				ft_conv_g_ptrgbigl.c\
 					ft_conv_s_ptrs.c				ft_conv_p_ptrp.c	\
-					ft_conv_c_ptrc.c
+					ft_conv_c_ptrc.c	\
+					main.c
 
 OBJS		=		$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))
 
@@ -50,7 +51,7 @@ RM			=		rm -f
 all			:		$(NAME)
 
 $(NAME)		:		$(OBJS) includes/ft_printf.h includes/ft_con_tab.h
-					ar -rucs $(NAME) $(OBJS)
+					$(CC) $(CFLAG) $(INCL) -o $(NAME) $(OBJS)
 
 $(OBJSDIR)/%.o			:		$(SRCSDIR)/%.c
 					@mkdir -p $(OBJSDIR)

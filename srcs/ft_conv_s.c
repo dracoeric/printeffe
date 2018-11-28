@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/26 09:09:19 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 09:15:00 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ int				ft_conv_s(t_format *format, va_list ap, t_list **list)
 	char	*str_arg;
 
 	str_arg = va_arg(ap, char*);
-	if (str_arg == NULL && !format->zero && !format->m_width)
+	if (str_arg == NULL)
 	{
-		free_format(format);
 		if (!(str_arg = ft_strsub("(null)", 0, 5)))
 			return (lst_dellall(list));
-		return (lst_addback(list, &str_arg, 6));
 	}
-	if (format->precision > 0)
+	else if (format->precision > 0)
 		str_arg = ft_strsub(str_arg, 0, format->precision - 1);
 	else if (format->precision == 0)
 		str_arg = ft_memalloc(1, 0);

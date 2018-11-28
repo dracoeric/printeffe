@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 13:28:45 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 17:18:45 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 09:20:20 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		init_format(t_format **format)
 	(*format)->zero = 0;
 	(*format)->space = 0;
 	(*format)->pointer = 0;
-	(*format)->m_width = 0;
+	(*format)->m_width = -1;
 	(*format)->precision = -1;
 	if (!((*format)->data_format_modifier = (char *)malloc(sizeof(char) * 3)))
 		return (-1);

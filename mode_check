@@ -1,0 +1,3 @@
+mv makefile maketest && mv makelib Makefile
+rm srcs/main.c;
+rm objs/main.o;

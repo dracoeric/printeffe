@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 15:40:14 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 10:18:32 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,32 @@ static	void	get_flags(const char *format_str, t_format *format, int *i)
 	}
 }
 
-static	int		ft_simple_atoi(const char *format_str, int *i, va_list ap)
+static	int		ft_simple_atoi(t_format *format, const char *format_str,
+					int *i, va_list ap)
 {
 	int nb;
+	int j;
 
+	j = *i;
 	nb = 0;
 	if (format_str[*i] == '*')
 	{
 		*i = *i + 1;
 		nb = va_arg(ap, int);
+		if (nb < 0 && format_str[j - 1] != '.')
+		{
+			nb = -nb;
+			format->minus = 1;
+		}
+		else if (nb < 0)
+			nb = -1;
 	}
+	if (format_str[*i] >= '0' && format_str[*i] <= '9' && *i)
+		nb = 0;
 	while (format_str[*i] >= '0' && format_str[*i] <= '9' && *i)
-	{
-		nb = (10 * nb) + (format_str[*i] - '0');
-		*i = *i + 1;
-	}
+		nb = (10 * nb) + (format_str[(*i)++] - '0');
+	if (j == *i && (format_str[j - 1] != '.' || format_str[j] == '.'))
+		return (format->m_width);
 	return (nb);
 }
 
@@ -82,16 +93,16 @@ int				manage_format(const char *format_str, t_format **format, int *i,
 	int no_prec;
 
 	no_prec = 1;
-	get_flags(format_str, *format, i);
-	len = ft_simple_atoi(format_str, i, ap);
-	(*format)->m_width = len;
-	while (char_in_str(format_str[*i], "#0-+ .jzlhL"))
+	while (char_in_str(format_str[*i], "#t0123456789-+ *.jzlhL"))
 	{
+		get_flags(format_str, *format, i);
+		len = ft_simple_atoi(*format, format_str, i, ap);
+		(*format)->m_width = len;
 		if (format_str[*i] == '.')
 		{
 			*i = *i + 1;
 			no_prec = 0;
-			len = ft_simple_atoi(format_str, i, ap);
+			len = ft_simple_atoi(*format, format_str, i, ap);
 			(*format)->precision = (no_prec ? -1 : len);
 		}
 		get_flags(format_str, *format, i);
