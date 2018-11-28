@@ -6,12 +6,11 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/28 14:26:49 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 14:45:38 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
 static	int		make_list_tmp(t_format *format, char ***tab, int *dim,
 					t_list **list_tmp)
@@ -47,7 +46,6 @@ static	int		add_list_tmp(t_list **list_tmp, t_list **list)
 	t_list	*bubble;
 	char	*str;
 
-	puts("ioci");
 	bubble = *list_tmp;
 	while (bubble != NULL && is_err != -1)
 	{

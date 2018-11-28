@@ -6,13 +6,11 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:09:57 by erli              #+#    #+#             */
-/*   Updated: 2018/11/28 11:24:19 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 14:55:21 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <unistd.h>
-#include <stdlib.h>
 
 static	int		manage_dir(const char *format_str, int *i, va_list ap,
 					t_list **list)

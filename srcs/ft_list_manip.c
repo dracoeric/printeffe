@@ -6,13 +6,12 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 13:14:42 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 16:30:07 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 14:57:59 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdlib.h>
-#include <unistd.h>
 
 t_list	*lst_create(char **cont, int len)
 {

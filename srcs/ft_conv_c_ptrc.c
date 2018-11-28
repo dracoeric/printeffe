@@ -6,12 +6,11 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/28 10:25:43 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 14:51:51 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
 static	int		make_list_tmp(t_format *format, char *tab, int len,
 					t_list **list_tmp)

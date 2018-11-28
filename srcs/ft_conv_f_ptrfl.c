@@ -6,12 +6,11 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/28 10:36:04 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 14:48:37 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
 static	int		max_width(const t_format *format, double *tab, int len)
 {

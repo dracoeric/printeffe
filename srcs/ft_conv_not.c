@@ -6,12 +6,11 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/26 10:01:51 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 14:53:06 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
 static	char	*add_width(t_format *format, char c, int *len)
 {

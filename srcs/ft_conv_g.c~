@@ -6,11 +6,12 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 11:28:08 by erli              #+#    #+#             */
-/*   Updated: 2018/11/28 14:53:39 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 14:17:02 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdlib.h>
 
 static	int		find_expo(long double nb)
 {
@@ -111,8 +112,9 @@ int				ft_conv_g(t_format *format, va_list ap, t_list **list)
 		c = 'e';
 	tmp = format->m_width;
 	if (format->precision == -1)
-		format->precision = 6;
-	format->precision = (format->precision == 0 ? 0 : format->precision - 1);
+		format->precision = 5;
+	else
+		format->precision = (format->precision == 0 ? 0 : format->precision - 1);
 	ret = (c == 'f' ? ft_conv_f(format, ap, list)
 		: ft_conv_e(format, ap, list));
 	remove_zeros(list, c, tmp);

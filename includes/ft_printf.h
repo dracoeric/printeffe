@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/28 13:15:38 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 14:43:41 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <stdarg.h>
 # include <string.h>
-
-# include <stdio.h>
 
 # define LEGAL_MOD "jzlhL"
 # define LEGAL_CONV "diouxXcspf%egbr"
