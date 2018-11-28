@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:21:23 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 15:32:40 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 11:23:46 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ int		get_converter(t_format *format, t_converter *fun)
 	t_conv	*g_tab;
 
 	i = 0;
-	if (format->pointer)
+	if (format->pointer == 1)
 		g_tab = g_conv_tab_ptr;
+	else if (format->pointer == 2)
+		g_tab = g_conv_tab_mat;
 	else
 		g_tab = g_conv_tab;
 	while (g_tab[i].symbol != 0)
