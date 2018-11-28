@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:33:20 by erli              #+#    #+#             */
-/*   Updated: 2018/11/28 10:18:32 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 10:23:01 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static	void	get_flags(const char *format_str, t_format *format, int *i)
 			format->space = 1;
 		if (format_str[*i] == 't')
 			format->pointer = 1;
+		if (format_str[*i] == 'm')
+			format->pointer = 2;
 		*i = *i + 1;
 	}
 }
@@ -93,7 +95,7 @@ int				manage_format(const char *format_str, t_format **format, int *i,
 	int no_prec;
 
 	no_prec = 1;
-	while (char_in_str(format_str[*i], "#t0123456789-+ *.jzlhL"))
+	while (char_in_str(format_str[*i], "#mt0123456789-+ *.jzlhL"))
 	{
 		get_flags(format_str, *format, i);
 		len = ft_simple_atoi(*format, format_str, i, ap);

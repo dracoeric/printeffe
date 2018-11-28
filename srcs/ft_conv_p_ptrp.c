@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 18:35:50 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 10:27:05 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static	int		make_list_tmp(t_format *format, unsigned long *tab, int len,
 	return (1);
 }
 
-static	int		add_in_list(t_list **list, t_list *bubble, int i, int n)
+static	int		add_in_list(t_list **list, t_list *bubble)
 {
 	char	*str;
 	int		is_err;
@@ -51,16 +51,13 @@ static	int		add_in_list(t_list **list, t_list *bubble, int i, int n)
 	is_err = lst_addback(list, &str, bubble->len);
 	if (is_err == -1)
 		return (-1);
-	if (i % n == (n - 1))
-		str = ft_strdup(",\n ");
-	else
-		str = ft_strdup(", ");
+	str = ft_strdup(", ");
 	if (str == NULL)
 		return (-1);
 	if (bubble->next == NULL)
 	{
 		str[0] = '}';
-		str[1] = '\n';
+		str[1] = '\0';
 	}
 	is_err = lst_addback(list, &str, ft_strlen(str));
 	return (is_err);
@@ -68,24 +65,19 @@ static	int		add_in_list(t_list **list, t_list *bubble, int i, int n)
 
 static	int		add_list_tmp(t_list **list_tmp, t_list **list)
 {
-	int		n_per_line;
 	char	*str;
 	int		is_err;
 	t_list	*bubble;
-	int		i;
 
-	n_per_line = (70 / (*list_tmp)->len == 0 ? 1 : 70 / (*list_tmp)->len);
 	if (!(str = ft_strdup("\n{")))
 		return (lst_dellall(list_tmp));
 	is_err = lst_addback(list, &str, ft_strlen(str));
 	if (is_err == -1)
 		return (lst_dellall(list_tmp));
 	bubble = *list_tmp;
-	i = 0;
 	while (bubble != NULL && is_err != -1)
 	{
-		is_err = add_in_list(list, bubble, i, n_per_line);
-		i++;
+		is_err = add_in_list(list, bubble);
 		bubble = bubble->next;
 	}
 	if (is_err == -1)

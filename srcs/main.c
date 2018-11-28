@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 09:56:28 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 18:38:42 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 10:29:10 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,15 @@ int		main(void)
 	c = 1;
 	i = 500;
 	u = i;
-	prec = 6;
-	width = 5;
+	prec = -15;
+	width = 50;
 
 	str = ft_memalloc(10, 48);
 	str2 = "caca";
 	str[9] = 0;
-	ret = printf("\ns: '%*.*d\n", width, prec, i );
+	ret = printf("\ns: %*d\n", width, 0);
 	printf("\nret = %d\n", ret);
-	ret = ft_printf("\ns: '%t*.*c\n", width, prec, tab, 4);
+	ret = ft_printf("\ns: %t*.*c\n", width, prec, tab, 4);
 	printf("\nret = %d\n", ret);
 	free(str);
 	return (0);
