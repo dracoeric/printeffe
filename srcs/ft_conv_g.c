@@ -6,7 +6,7 @@
 /*   By: erli <erli@42.fr>                          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 11:28:08 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 17:17:28 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 14:17:02 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static	void	add_width(t_list **list, int width)
 	offset = width - len;
 	i = len - 1 + offset;
 	j = 0;
-	while (j < len)
+	while (j < len && offset > 0)
 	{
 		(bubble->content)[i - j] = (bubble->content)[i - j - offset];
 		j++;
@@ -60,7 +60,7 @@ static	void	add_width(t_list **list, int width)
 		(bubble->content)[j] = ' ';
 		j++;
 	}
-	bubble->len = len + offset;
+	bubble->len = (offset > 0 ? len + offset : len);
 }
 
 static	void	remove_zeros(t_list **list, char c, int width)
@@ -111,7 +111,10 @@ int				ft_conv_g(t_format *format, va_list ap, t_list **list)
 	if (tmp < -4 || tmp >= (format->precision == -1 ? 6 : format->precision))
 		c = 'e';
 	tmp = format->m_width;
-	format->precision = (format->precision == 0 ? 0 : format->precision - 1);
+	if (format->precision == -1)
+		format->precision = 5;
+	else
+		format->precision = (format->precision == 0 ? 0 : format->precision - 1);
 	ret = (c == 'f' ? ft_conv_f(format, ap, list)
 		: ft_conv_e(format, ap, list));
 	remove_zeros(list, c, tmp);
