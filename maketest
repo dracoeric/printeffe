@@ -6,7 +6,7 @@
 #    By: erli <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/14 17:45:59 by erli              #+#    #+#              #
-#    Updated: 2018/11/28 08:54:31 by erli             ###   ########.fr        #
+#    Updated: 2018/11/28 13:09:22 by erli             ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -34,7 +34,15 @@ SRCS		=		ft_printf.c		ft_conv_d.c		ft_put_format.c		\
 					ft_conv_e_ptrel.c				ft_conv_e_ptrebigl.c\
 					ft_conv_g_ptrgl.c				ft_conv_g_ptrgbigl.c\
 					ft_conv_s_ptrs.c				ft_conv_p_ptrp.c	\
-					ft_conv_c_ptrc.c	\
+					ft_conv_c_ptrc.c				ft_conv_mat.c		\
+					ft_conv_d_matd.c				ft_conv_d_matdh.c	\
+					ft_conv_d_matdl.c				ft_conv_d_matdhh.c	\
+					ft_conv_d_matdll.c				ft_conv_o_mato.c	\
+					ft_conv_o_matol.c				ft_conv_o_matoll.c	\
+					ft_conv_o_matoh.c				ft_conv_o_matohh.c	\
+					ft_conv_f_matfl.c				ft_conv_f_matfbigl.c\
+					ft_conv_c_matc.c				ft_conv_s_mats.c	\
+					ft_conv_p_matp.c	\
 					main.c
 
 OBJS		=		$(addprefix $(OBJSDIR)/, $(SRCS:.c=.o))

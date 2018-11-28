@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/14 11:08:07 by erli              #+#    #+#             */
-/*   Updated: 2018/11/27 18:47:29 by erli             ###   ########.fr       */
+/*   Updated: 2018/11/28 13:15:38 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,24 @@ int				ft_conv_g_ptrgbigl(t_format *format, va_list ap, t_list **list);
 int				ft_conv_c_ptrc(t_format *format, va_list ap, t_list **list);
 int				ft_conv_s_ptrs(t_format *format, va_list ap, t_list **list);
 int				ft_conv_p_ptrp(t_format *format, va_list ap, t_list **list);
+int				ft_conv_d_mat(t_format *format, va_list ap, t_list **list);
+int				ft_conv_d_matd(t_format *format, va_list ap, t_list **list);
+int				ft_conv_d_matdh(t_format *format, va_list ap, t_list **list);
+int				ft_conv_d_matdhh(t_format *format, va_list ap, t_list **list);
+int				ft_conv_d_matdl(t_format *format, va_list ap, t_list **list);
+int				ft_conv_d_matdll(t_format *format, va_list ap, t_list **list);
+int				ft_conv_o_mat(t_format *format, va_list ap, t_list **list);
+int				ft_conv_o_mato(t_format *format, va_list ap, t_list **list);
+int				ft_conv_o_matoh(t_format *format, va_list ap, t_list **list);
+int				ft_conv_o_matohh(t_format *format, va_list ap, t_list **list);
+int				ft_conv_o_matol(t_format *format, va_list ap, t_list **list);
+int				ft_conv_o_matoll(t_format *format, va_list ap, t_list **list);
+int				ft_conv_f_mat(t_format *format, va_list ap, t_list **list);
+int				ft_conv_f_matfl(t_format *format, va_list ap, t_list **list);
+int				ft_conv_f_matfbigl(t_format *format, va_list ap, t_list **list);
+int				ft_conv_c_matc(t_format *format, va_list ap, t_list **list);
+int				ft_conv_s_mats(t_format *format, va_list ap, t_list **list);
+int				ft_conv_p_matp(t_format *format, va_list ap, t_list **list);
 int				ft_conv_o(t_format *format, va_list ap, t_list **list);
 int				ft_conv_u(t_format *format, va_list ap, t_list **list);
 int				ft_conv_x(t_format *format, va_list ap, t_list **list);
