@@ -1,3 +1,0 @@
-mv Makefile makelib;
-mv maketest Makefile;
-cp ../test_file_ft_printf/main.c srcs/;
