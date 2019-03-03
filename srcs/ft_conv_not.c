@@ -6,7 +6,7 @@
 /*   By: erli <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 09:29:36 by erli              #+#    #+#             */
-/*   Updated: 2018/11/28 14:53:06 by erli             ###   ########.fr       */
+/*   Updated: 2019/03/03 10:44:35 by erli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ int				ft_conv_not(t_format *format, va_list ap, t_list **list)
 	char	c;
 	int		len;
 
-	if (ap != NULL)
-		;
+	if (ap == NULL)
+		return (-1);
 	c = format->conversion;
 	str = add_width(format, c, &len);
 	if (str == NULL)
